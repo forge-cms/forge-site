@@ -1,0 +1,209 @@
+/* forge-cms.dev — Base
+   Decision C2: element resets and global typography only.
+   No class selectors except .prose (Decision C4).
+   ========================================================================== */
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Root ── */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background:               var(--bg);
+  color:                    var(--text);
+  font-family:              var(--mono);
+  font-size:                0.875rem;
+  line-height:              1.6;
+  -webkit-font-smoothing:   antialiased;
+  -moz-osx-font-smoothing:  grayscale;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family:    var(--mono);
+  font-weight:    600;
+  line-height:    1.2;
+  letter-spacing: -0.02em;
+  color:          var(--text);
+}
+
+p {
+  line-height: 1.7;
+}
+
+a {
+  color:           var(--accent);
+  text-decoration: none;
+  transition:      opacity 0.12s;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+code {
+  font-family:   var(--mono);
+  font-size:     0.875em;
+  background:    var(--bg-3);
+  padding:       0.1em 0.3em;
+  border-radius: 2px;
+  color:         var(--text);
+}
+
+pre {
+  font-family: var(--mono);
+  overflow-x:  auto;
+}
+
+pre code {
+  background: transparent;
+  padding:    0;
+  font-size:  inherit;
+}
+
+hr {
+  border:     none;
+  border-top: 1px solid var(--border);
+  margin:     0;
+}
+
+img {
+  max-width: 100%;
+  display:   block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ── .prose — forge_markdown output (Decision C4) ──
+   The only place element selectors are permitted.
+   Always wrap {{forge_markdown .Content.Body}} in <div class="prose">.
+   ========================================================================== */
+.prose {
+  font-family: var(--sans);
+  font-size:   0.9375rem;
+  font-weight: 300;
+  color:       var(--text);
+  line-height: 1.75;
+}
+
+.prose p {
+  margin-bottom: var(--space-4);
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+.prose h2 {
+  font-family:   var(--mono);
+  font-size:     1.1rem;
+  font-weight:   600;
+  margin-top:    var(--space-8);
+  margin-bottom: var(--space-3);
+  color:         var(--text);
+}
+
+.prose h3 {
+  font-family:   var(--mono);
+  font-size:     0.95rem;
+  font-weight:   500;
+  margin-top:    var(--space-6);
+  margin-bottom: var(--space-2);
+  color:         var(--text);
+}
+
+.prose h4, .prose h5, .prose h6 {
+  font-family:   var(--mono);
+  font-size:     0.875rem;
+  font-weight:   500;
+  margin-top:    var(--space-4);
+  margin-bottom: var(--space-2);
+  color:         var(--text-muted);
+}
+
+.prose a {
+  color:           var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  opacity: 0.8;
+}
+
+.prose strong {
+  font-weight: 600;
+  color:       var(--text);
+}
+
+.prose em {
+  font-style: italic;
+  color:      var(--text-muted);
+}
+
+.prose code {
+  font-family:   var(--mono);
+  font-size:     0.825em;
+  background:    var(--bg-3);
+  border:        1px solid var(--border);
+  padding:       0.1em 0.35em;
+  border-radius: 2px;
+  color:         var(--accent);
+}
+
+.prose pre {
+  background:    var(--bg-2);
+  border:        1px solid var(--border);
+  border-radius: 4px;
+  padding:       var(--space-4) var(--space-6);
+  overflow-x:    auto;
+  margin-bottom: var(--space-4);
+}
+
+.prose pre code {
+  background:    transparent;
+  border:        none;
+  padding:       0;
+  font-size:     0.8rem;
+  color:         var(--text);
+}
+
+.prose ul, .prose ol {
+  padding-left:  var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li {
+  margin-bottom: var(--space-1);
+  line-height:   1.65;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--border-2);
+  padding-left: var(--space-4);
+  color:        var(--text-muted);
+  margin:       var(--space-6) 0;
+  font-style:   italic;
+}
+
+.prose hr {
+  margin: var(--space-8) 0;
+}

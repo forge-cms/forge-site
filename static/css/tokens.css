@@ -1,0 +1,47 @@
+/* forge-cms.dev — Design Tokens
+   Decision C5: all values defined here, referenced everywhere else via var()
+   Do not add selectors or rules to this file. Tokens only.
+   ========================================================================== */
+
+:root {
+  /* Backgrounds */
+  --bg:            #0a0b0d;
+  --bg-2:          #111316;
+  --bg-3:          #181b1f;
+
+  /* Borders */
+  --border:        #1f2329;
+  --border-2:      #2a3038;
+
+  /* Text */
+  --text:          #dde1e7;
+  --text-muted:    #6b7280;
+  --text-dim:      #3d4450;
+
+  /* Accent */
+  --accent:        #e8702f;
+  --accent-dim:    #e8702f1a;
+  --accent-border: #e8702f33;
+
+  /* Semantic */
+  --green:         #3fb950;
+
+  /* Typography */
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --sans: 'Inter', system-ui, sans-serif;
+
+  /* Spacing scale */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Layout */
+  --max-width:  900px;
+  --nav-height: 52px;
+}
