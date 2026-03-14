@@ -197,6 +197,14 @@ Decisions: {IDs or "none"}
 ```
 Types: `feat`, `fix`, `content`, `style`, `docs`, `chore`
 
+**TODO.md must be updated as part of every task completion.**
+
+When a backlog item is fully done and committed:
+- Move it from its current section to `## Done` with today's date
+- Move the next Backlog item to `## Up next` if In progress drops below 2
+
+This update is included in the same commit as the work it tracks — never a separate commit.
+
 **Never commit without explicit user approval.**
 Run autonomously: `go build ./...`, `go vet ./...`, `gofmt -l .`, any read-only git command.
 
