@@ -1,12 +1,14 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"embed"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/forge-cms/forge"
 	_ "modernc.org/sqlite"
@@ -39,6 +41,14 @@ func main() {
 	}
 	defer db.Close()
 
+	if err := migrateDB(db); err != nil {
+		log.Fatalf("forge-site: migrate db: %v", err)
+	}
+
+	postRepo := forge.NewSQLRepo[*Post](db)
+	docRepo := forge.NewSQLRepo[*DocPage](db)
+	seedDB(context.Background(), postRepo, docRepo)
+
 	app := forge.New(forge.Config{
 		BaseURL: baseURL,
 		Secret:  []byte(secret),
@@ -50,8 +60,26 @@ func main() {
 	app.Health()
 	app.SEO(&forge.RobotsConfig{Sitemaps: true})
 
-	// TODO(content-types): register Post module at /devlog
-	// TODO(content-types): register DocPage module at /docs
+	app.Content(forge.NewModule((*Post)(nil),
+		forge.Repo(postRepo),
+		forge.At("/devlog"),
+		forge.TemplatesOptional("templates/devlog"),
+		forge.SitemapConfig{},
+		forge.Social(forge.OpenGraph, forge.TwitterCard),
+		forge.Feed(forge.FeedConfig{Title: "Forge Devlog"}),
+		forge.AIIndex(forge.LLMsTxt, forge.LLMsTxtFull, forge.AIDoc),
+		forge.Cache(5*time.Minute),
+	))
+
+	app.Content(forge.NewModule((*DocPage)(nil),
+		forge.Repo(docRepo),
+		forge.At("/docs"),
+		forge.TemplatesOptional("templates/docs"),
+		forge.SitemapConfig{},
+		forge.AIIndex(forge.LLMsTxt, forge.LLMsTxtFull, forge.AIDoc),
+		forge.Cache(10*time.Minute),
+	))
+
 	// TODO(templates): register home page handler at /
 
 	maybeLogAdminToken(secret)

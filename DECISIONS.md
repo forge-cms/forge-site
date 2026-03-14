@@ -172,3 +172,18 @@ Caddy health check points to `/_health`.
 | `SECRET` env var | No default; compose errors if unset | `requireEnv("SECRET")` in `main.go` crashes the process if `SECRET` is empty. No default in compose enforces this at the orchestration layer. Operators must supply `SECRET` via `.env` or the host environment. |
 
 **Consequences:** `docker-compose.yml` and `Caddyfile` (Caddy-on-host architecture).
+
+---
+
+### Amendment S4 — Tags storage and content type schema (amends D1, D4)
+
+**Decision:** The following storage choices are locked for content types:
+
+| Choice | Value | Rationale |
+|--------|-------|-----------|
+| `Post.Tags` storage | JSON TEXT column (`["forge","go"]`) | SQLite has no native array type. Tags are serialised/deserialised via a `JSONStringSlice` custom type implementing `driver.Valuer` + `sql.Scanner`. Field tagged `db:"tags"`. |
+| Table names | `posts`, `doc_pages` | Auto-derived by `SQLRepo` (`Post` → `posts`, `DocPage` → `doc_pages`). No `forge.Table()` override needed. |
+| Schema creation | Manual `CREATE TABLE IF NOT EXISTS` in `schema.go`, called from `main()` before modules are wired | Forge does not auto-create schema. Upsert (`ON CONFLICT (id) DO UPDATE`) requires tables to exist at startup. |
+| Type parameter | Pointer type throughout: `forge.NewSQLRepo[*Post](db)`, proto `(*Post)(nil)`, `Module[*Post]` | `NewModule` infers T from the proto value. `Repo[T]` must match — `Repository[Post]` does not satisfy `Repository[*Post]`. All Forge examples and tests use pointer types consistently. |
+
+**Consequences:** `post.go`, `docpage.go`, `stringslice.go`, `schema.go`, `main.go`.
