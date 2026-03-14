@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"database/sql"
 	"embed"
+	"html/template"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
@@ -14,7 +17,7 @@ import (
 	_ "modernc.org/sqlite"
 )
 
-//go:embed all:templates
+//go:embed templates
 var templates embed.FS
 
 //go:embed static
@@ -22,6 +25,16 @@ var static embed.FS
 
 // Version is set at build time via -ldflags "-X main.Version=x.y.z".
 var Version string
+
+// homeData is the template data passed to templates/home/home.html.
+// It mirrors forge.TemplateData but without generic type constraints so
+// the home handler can be wired with a plain http.Handler.
+type homeData struct {
+	Head     forge.Head
+	Request  *http.Request
+	SiteName string
+	Posts    []*Post
+}
 
 func main() {
 	secret := requireEnv("SECRET")
@@ -49,6 +62,17 @@ func main() {
 	docRepo := forge.NewSQLRepo[*DocPage](db)
 	seedDB(context.Background(), postRepo, docRepo)
 
+	// Parse the home page template once at startup.
+	// base.html + home.html are embedded in the binary via go:embed.
+	// forge:head is NOT used here — forgeHeadTmpl is package-private in
+	// the forge package. The home handler constructs <head> tags manually
+	// from homeData.Head fields. This is intentional; see Amendment S5.
+	homeTmpl, err := template.New("").Funcs(forge.TemplateFuncMap()).
+		ParseFS(templates, "templates/base.html", "templates/home/home.html")
+	if err != nil {
+		log.Fatalf("forge-site: parse home template: %v", err)
+	}
+
 	app := forge.New(forge.Config{
 		BaseURL: baseURL,
 		Secret:  []byte(secret),
@@ -63,7 +87,7 @@ func main() {
 	app.Content(forge.NewModule((*Post)(nil),
 		forge.Repo(postRepo),
 		forge.At("/devlog"),
-		forge.TemplatesOptional("templates/devlog"),
+		forge.Templates("templates/devlog"),
 		forge.SitemapConfig{},
 		forge.Social(forge.OpenGraph, forge.TwitterCard),
 		forge.Feed(forge.FeedConfig{Title: "Forge Devlog"}),
@@ -74,13 +98,49 @@ func main() {
 	app.Content(forge.NewModule((*DocPage)(nil),
 		forge.Repo(docRepo),
 		forge.At("/docs"),
-		forge.TemplatesOptional("templates/docs"),
+		forge.Templates("templates/docs"),
 		forge.SitemapConfig{},
 		forge.AIIndex(forge.LLMsTxt, forge.LLMsTxtFull, forge.AIDoc),
 		forge.Cache(10*time.Minute),
 	))
 
-	// TODO(templates): register home page handler at /
+	hostname := strings.TrimPrefix(strings.TrimPrefix(baseURL, "https://"), "http://")
+	app.Handle("GET /", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			http.NotFound(w, r)
+			return
+		}
+		all, err := postRepo.FindAll(r.Context(), forge.ListOptions{})
+		var recent []*Post
+		if err == nil {
+			for _, p := range all {
+				if p.Status == forge.Published {
+					recent = append(recent, p)
+					if len(recent) == 3 {
+						break
+					}
+				}
+			}
+		}
+		data := homeData{
+			Head: forge.Head{
+				Title:       "Forge — The Go web framework built for the age of AI",
+				Description: "Forge is a Go web framework designed for developers, AI builders, human visitors, and AI agents consuming content.",
+				Canonical:   baseURL + "/",
+			},
+			Request:  r,
+			SiteName: hostname,
+			Posts:    recent,
+		}
+		var buf bytes.Buffer
+		if err := homeTmpl.ExecuteTemplate(&buf, "base", data); err != nil {
+			http.Error(w, "internal error", http.StatusInternalServerError)
+			log.Printf("forge-site: home template: %v", err)
+			return
+		}
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = w.Write(buf.Bytes())
+	}))
 
 	maybeLogAdminToken(secret)
 

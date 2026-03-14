@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{template "forge:head" .Head}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400&display=swap">
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+</head>
+<body>
+
+{{/* Nav — keep in sync with templates/base.html per Amendment S6 */}}
+<nav class="nav">
+  <a href="/" class="nav__logo"><span class="nav__logo-bracket">[</span>forge<span class="nav__logo-bracket">]</span></a>
+  <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false">menu</button>
+  <ul class="nav__links">
+    <li><a href="/docs"   class="nav__link nav__link--active">docs</a></li>
+    <li><a href="/devlog" class="nav__link">devlog</a></li>
+    <li><a href="https://github.com/forge-cms/forge" class="nav__cta" target="_blank" rel="noopener">github</a></li>
+  </ul>
+</nav>
+
+<main class="layout">
+  <div class="doc-page">
+
+    <aside class="doc-page__sidebar">
+      <nav class="doc-nav">
+        <div class="doc-nav__section">
+          <a href="/docs" class="footer__link">← docs</a>
+        </div>
+        {{if .Content.Section}}
+        <div class="doc-nav__section">
+          <p class="doc-nav__section-label">{{.Content.Section}}</p>
+          <a href="/docs/{{.Content.Slug}}" class="doc-nav__link doc-nav__link--active">{{.Content.Title}}</a>
+        </div>
+        {{end}}
+      </nav>
+    </aside>
+
+    <div class="doc-page__content">
+
+      {{if .Head.Breadcrumbs}}
+      <p class="doc-page__meta">
+        {{range $i, $c := .Head.Breadcrumbs}}{{if $i}} / {{end}}<a href="{{$c.URL}}" class="footer__link">{{$c.Label}}</a>{{end}}
+      </p>
+      {{end}}
+
+      <h1 class="doc-page__title">{{.Content.Title}}</h1>
+
+      <p class="doc-page__meta">
+        {{if .Content.Section}}{{.Content.Section}}{{end}}
+        {{if and .Content.Section .Content.Order}} · {{end}}
+        {{if .Content.Order}}{{.Content.Order}}{{end}}
+      </p>
+
+      <div class="prose">{{forge_markdown .Content.Body}}</div>
+
+    </div>
+  </div>
+</main>
+
+{{/* Footer — keep in sync with templates/base.html per Amendment S6 */}}
+<footer>
+  <div class="footer">
+    <span class="footer__logo"><span class="footer__logo-bracket">[</span>forge<span class="footer__logo-bracket">]</span></span>
+    <ul class="footer__links">
+      <li><a href="/docs"    class="footer__link">docs</a></li>
+      <li><a href="/devlog"  class="footer__link">devlog</a></li>
+      <li><a href="https://x.com/forge_cms"            class="footer__link" target="_blank" rel="noopener">x</a></li>
+      <li><a href="https://mastodon.social/@forge_cms"  class="footer__link" target="_blank" rel="noopener">mastodon</a></li>
+      <li><a href="https://github.com/forge-cms/forge"  class="footer__link" target="_blank" rel="noopener">github</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var nav = document.querySelector('.nav');
+  var toggle = document.querySelector('.nav__toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('nav--open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    var target = btn.dataset.copy;
+    if (!target) return;
+    navigator.clipboard.writeText(target).then(function () {
+      var orig = btn.textContent;
+      btn.textContent = 'copied';
+      setTimeout(function () { btn.textContent = orig; }, 1500);
+    });
+  });
+}());
+</script>
+
+</body>
+</html>

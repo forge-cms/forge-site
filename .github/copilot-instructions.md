@@ -205,6 +205,10 @@ When a backlog item is fully done and committed:
 
 This update is included in the same commit as the work it tracks — never a separate commit.
 
+**SESSION_CONTEXT.md must be updated at every commit** — update Current
+status, Latest amendments, and Next up to reflect the state after the
+commit. This update is included in the same commit as the work it tracks.
+
 **Never commit without explicit user approval.**
 Run autonomously: `go build ./...`, `go vet ./...`, `gofmt -l .`, any read-only git command.
 

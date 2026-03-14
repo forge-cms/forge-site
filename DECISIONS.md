@@ -187,3 +187,39 @@ Caddy health check points to `/_health`.
 | Type parameter | Pointer type throughout: `forge.NewSQLRepo[*Post](db)`, proto `(*Post)(nil)`, `Module[*Post]` | `NewModule` infers T from the proto value. `Repo[T]` must match — `Repository[Post]` does not satisfy `Repository[*Post]`. All Forge examples and tests use pointer types consistently. |
 
 **Consequences:** `post.go`, `docpage.go`, `stringslice.go`, `schema.go`, `main.go`.
+
+---
+
+### Amendment S6 — Forge v1.0.6 template workarounds (amends D3, D7)
+
+**Decision:** Three known Forge v1.0.6 limitations require explicit workarounds
+in forge-site. Each will be removed when the corresponding Forge feature ships.
+
+| Limitation | Workaround | Removes when |
+|------------|------------|--------------|
+| No shared template partials | Nav and footer duplicated in all four module templates | Forge shared partials (Phase 2) |
+| `forgeHeadTmpl` is package-private | `base.html` uses manual `<head>` meta tags | `forge.HeadPartial()` or equivalent (Phase 2) |
+| `forge.New` accepts invalid config silently | `main.go` uses `forge.MustConfig` explicitly | `forge.New` enforces validation internally (Phase 2) |
+
+**Consequences:** Any change to nav, footer, or `<head>` meta must be applied
+in `base.html` + all four module templates until shared partials ship.
+
+---
+
+### Amendment S5 — Template delivery: disk for modules, embed for home (amends D3, D5, D7)
+
+**Decision:** Forge v1.0.6 loads module templates from the OS filesystem
+via `os.Stat` + `template.ParseFiles`. There is no `embed.FS` support in
+`Templates()` or `TemplatesOptional()`. This has two consequences:
+
+| Concern | Decision |
+|---------|----------|
+| Module templates (`templates/devlog/`, `templates/docs/`) | Copied into the Docker runtime image via `COPY templates/ /app/templates/` in `Dockerfile`. Forge reads them from disk at startup. |
+| Home page (`templates/base.html`, `templates/home/home.html`) | Parsed at startup from the embedded FS via `template.ParseFS(templates, ...)`. The `//go:embed templates` directive includes all template files in the binary. |
+| Home page `<head>` meta | Written as manual HTML tags in `base.html`. `forgeHeadTmpl` (the partial Forge injects into module templates) is package-private and not accessible from outside the `forge` package. This is intentional — not a bug. |
+
+**Consequences:** `Dockerfile` gains `COPY templates/ /app/templates/`. The
+`//go:embed` directive on `main.go` changes from `all:templates` to `templates`
+(no hidden files remain). Any nav/footer/head change must be applied in five
+places: `base.html` + `devlog/list.html` + `devlog/show.html` +
+`docs/list.html` + `docs/show.html` (per S6).

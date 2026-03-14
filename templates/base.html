@@ -1,0 +1,84 @@
+{{define "base"}}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{if .Head.Title}}{{.Head.Title}}{{else}}Forge{{end}}</title>
+  {{if .Head.Description}}<meta name="description" content="{{.Head.Description}}">{{end}}
+  <link rel="canonical" href="{{.Head.Canonical}}">
+
+  {{/* Open Graph */}}
+  <meta property="og:title"       content="{{if .Head.Title}}{{.Head.Title}}{{else}}Forge{{end}}">
+  {{if .Head.Description}}<meta property="og:description" content="{{.Head.Description}}">{{end}}
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="{{.Head.Canonical}}">
+
+  {{/* Google Fonts */}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400&display=swap">
+
+  {{/* Styles */}}
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav__logo"><span class="nav__logo-bracket">[</span>forge<span class="nav__logo-bracket">]</span></a>
+  <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false">menu</button>
+  <ul class="nav__links">
+    <li><a href="/docs"   class="nav__link{{if eq .Request.URL.Path "/docs"}} nav__link--active{{end}}">docs</a></li>
+    <li><a href="/devlog" class="nav__link{{if eq .Request.URL.Path "/devlog"}} nav__link--active{{end}}">devlog</a></li>
+    <li><a href="https://github.com/forge-cms/forge" class="nav__cta" target="_blank" rel="noopener">github</a></li>
+  </ul>
+</nav>
+
+<main class="layout">
+  {{block "content" .}}{{end}}
+</main>
+
+<footer>
+  <div class="footer">
+    <span class="footer__logo"><span class="footer__logo-bracket">[</span>forge<span class="footer__logo-bracket">]</span></span>
+    <ul class="footer__links">
+      <li><a href="/docs"    class="footer__link">docs</a></li>
+      <li><a href="/devlog"  class="footer__link">devlog</a></li>
+      <li><a href="https://x.com/forge_cms"           class="footer__link" target="_blank" rel="noopener">x</a></li>
+      <li><a href="https://mastodon.social/@forge_cms" class="footer__link" target="_blank" rel="noopener">mastodon</a></li>
+      <li><a href="https://github.com/forge-cms/forge" class="footer__link" target="_blank" rel="noopener">github</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Nav toggle (mobile)
+  var nav = document.querySelector('.nav');
+  var toggle = document.querySelector('.nav__toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('nav--open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // Copy-to-clipboard for .copy-btn elements
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    var target = btn.dataset.copy;
+    if (!target) return;
+    navigator.clipboard.writeText(target).then(function () {
+      var orig = btn.textContent;
+      btn.textContent = 'copied';
+      setTimeout(function () { btn.textContent = orig; }, 1500);
+    });
+  });
+}());
+</script>
+
+</body>
+</html>
+{{end}}

@@ -34,6 +34,8 @@ USER app
 WORKDIR /app
 
 COPY --from=build /forge-site /app/forge-site
+# Forge v1.0.6 reads module templates from disk at runtime (see Amendment S5).
+COPY templates/ /app/templates/
 
 # Data directory is provided by a Docker volume at runtime.
 VOLUME ["/app/data"]
