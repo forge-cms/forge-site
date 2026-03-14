@@ -139,3 +139,36 @@ app.Health()
 
 `Config.Version` set from build-time ldflags. Response: `{"status":"ok","version":"X.Y.Z"}`.
 Caddy health check points to `/_health`.
+
+---
+
+### Amendment S2 — Dockerfile build decisions (amends D5)
+
+**Decision:** The following choices are locked for the Dockerfile:
+
+| Choice | Value | Rationale |
+|--------|-------|-----------|
+| Build stage image | `golang:1.26-alpine` | Matches installed toolchain; `go.mod` declares `go 1.26`. D5 referenced the stale `1.22`. |
+| `CGO_ENABLED` | `0` | `modernc.org/sqlite` is pure-Go — no C toolchain needed. Produces a fully static binary. |
+| Build flags | `-trimpath -ldflags "-s -w"` | Strips local file paths and debug symbols; keeps the runtime image small. |
+| Runtime user | `app` (uid 1000) | Non-root for container security hardening. |
+| `VERSION` injection | `ARG VERSION=dev` → `-X main.Version=${VERSION}` | Build-time version flows into `Config.Version` and the `/_health` response. Defaults to `dev` when not supplied. |
+| Data volume | `VOLUME ["/app/data"]` | Signals the SQLite mount point to Docker; wired to a named volume in `docker-compose.yml`. |
+
+**Consequences:** `Dockerfile` only. No application code changes beyond what was already decided in D4 and D9.
+
+---
+
+### Amendment S3 — docker-compose configuration decisions (amends D5, S2, D9)
+
+**Decision:** The following choices are locked for `docker-compose.yml`:
+
+| Choice | Value | Rationale |
+|--------|-------|-----------|
+| Caddy topology | Caddy runs on the **host machine**, not in a Docker container. The app container is the only containerised process. | Keeps the setup simple: one container, one binary, no inter-container networking. Caddy manages TLS and certificates directly on the host. |
+| Port binding | `127.0.0.1:8080:8080` | Loopback-only binding is the direct consequence of the Caddy-on-host topology. Only the host Caddy can reach port 8080; the port is not reachable from the public internet or other containers. |
+| Container healthcheck | `wget -qO- http://localhost:8080/_health` every 30 s | Docker daemon container check, separate from Caddy's health check (D9). Uses `wget` — present in the `alpine` base image without extra packages. |
+| SQLite volume name | `forge_data` | Named volume backing `/app/data` in the app container. Consistent with S2's `VOLUME ["/app/data"]`. |
+| `SECRET` env var | No default; compose errors if unset | `requireEnv("SECRET")` in `main.go` crashes the process if `SECRET` is empty. No default in compose enforces this at the orchestration layer. Operators must supply `SECRET` via `.env` or the host environment. |
+
+**Consequences:** `docker-compose.yml` and `Caddyfile` (Caddy-on-host architecture).

@@ -1,0 +1,35 @@
+# forge-cms.dev — Caddyfile
+# Caddy runs on the host machine (not in Docker). See DECISIONS.md S3.
+#
+# Replace DOMAIN_PLACEHOLDER with the real domain before deploying.
+# TLS certificates are provisioned automatically via ACME (Let's Encrypt).
+
+DOMAIN_PLACEHOLDER {
+    # Proxy all traffic to the app container (loopback binding, port 8080).
+    # Health check: Caddy polls /_health before marking the upstream healthy.
+    # The app's forge.Health() handler responds with {"status":"ok","version":"..."}.
+    reverse_proxy localhost:8080 {
+        health_uri      /_health
+        health_interval 30s
+        health_timeout  5s
+    }
+
+    # Security headers (belt-and-suspenders alongside forge.SecurityHeaders()).
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Frame-Options           "DENY"
+        X-Content-Type-Options    "nosniff"
+        Referrer-Policy           "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    # Access log — structured JSON for easy parsing.
+    log {
+        output file /var/log/caddy/forge-cms.dev.access.log {
+            roll_size    100MiB
+            roll_keep    5
+            roll_keep_for 720h
+        }
+        format json
+    }
+}

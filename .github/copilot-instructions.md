@@ -180,6 +180,16 @@ No inline styles except hero. No JS for layout or styling.
 Amendment required when: adding a content type field, changing a URL prefix,
 adding JS, changing CSS file structure. See `GOVERNANCE.md`.
 
+**Copilot must self-identify amendments.** Before reporting task completion,
+scan what was implemented and ask: does this contradict or extend an existing
+decision in `DECISIONS.md`? If yes, propose the Amendment text before proposing
+a commit. Do not wait for the user to notice.
+
+Examples of things that trigger a self-identified amendment:
+- A version, tool, or dependency that differs from what `DECISIONS.md` states
+- A build flag, env var, or configuration choice not covered by an existing decision
+- A structural choice (file layout, naming, port) that extends a locked decision
+
 Commit format:
 ```
 {type}({scope}): {short description}

@@ -1,0 +1,71 @@
+# forge-cms.dev — REST Client requests
+# VS Code extension: REST Client (humao.rest-client)
+#
+# Usage:
+#   1. Run the app: go run . (SECRET=... must be set)
+#   2. Copy the token logged to stdout into @token below, OR set ADMIN_TOKEN.
+#   3. Click "Send Request" above any ### block.
+#
+# The app logs an admin token on startup when ADMIN_TOKEN env var is not set.
+# Token has no expiry (TTL=0). Rotate by changing SECRET and restarting.
+
+@baseUrl = http://localhost:8080
+@token = PASTE_ADMIN_TOKEN_HERE
+
+### ─── 1. Health check ──────────────────────────────────────────────────────
+
+GET {{baseUrl}}/_health
+Accept: application/json
+
+### ─── 2. Create a Post (draft) ─────────────────────────────────────────────
+# Response includes "ID" and "Slug" — copy Slug into @postSlug below.
+
+# @name createPost
+POST {{baseUrl}}/devlog
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "Title": "Hello from Forge",
+  "Body": "This is the first devlog post, created via the content API.",
+  "Tags": ["forge", "go", "cms"]
+}
+
+### ─── 3. Publish the Post ───────────────────────────────────────────────────
+# Replace SLUG with the Slug value returned in step 2.
+# PUT /{prefix}/{slug} is the update endpoint; setting Status = "published"
+# triggers the publish lifecycle event (sitemap regeneration, feed update).
+
+@postSlug = REPLACE_WITH_SLUG_FROM_STEP_2
+
+PUT {{baseUrl}}/devlog/{{postSlug}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "Title": "Hello from Forge",
+  "Body": "This is the first devlog post, created via the content API.",
+  "Tags": ["forge", "go", "cms"],
+  "Status": "published"
+}
+
+### ─── 4. Create a DocPage (draft) ──────────────────────────────────────────
+# Response includes "ID" and "Slug" — copy Slug into @docSlug below.
+
+# @name createDoc
+POST {{baseUrl}}/docs
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "Title": "Getting Started",
+  "Body": "Welcome to Forge. This guide covers installation and your first app.",
+  "Section": "introduction",
+  "Order": 1
+}
+
+### ─── 5. Verify published Post is publicly visible ─────────────────────────
+# No auth required — Forge only serves Published items on public GET endpoints.
+
+GET {{baseUrl}}/devlog/{{postSlug}}
+Accept: application/json
