@@ -53,8 +53,6 @@
 
       <p class="doc-page__meta">
         {{if .Content.Section}}{{.Content.Section}}{{end}}
-        {{if and .Content.Section .Content.Order}} · {{end}}
-        {{if .Content.Order}}{{.Content.Order}}{{end}}
       </p>
 
       <div class="prose">{{forge_markdown .Content.Body}}</div>

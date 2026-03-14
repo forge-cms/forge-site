@@ -8,6 +8,7 @@ session alongside PROJECT_BRIEF.md to restore full context.
 - Content types: ✅ done
 - Templates — base + home: ✅ done
 - Templates — module (4 templates): ✅ done
+- Smoke-test (all routes 200/404 as expected): ✅ done
 - Static assets smoke-test: 🔲 up next
 
 ## Latest amendments

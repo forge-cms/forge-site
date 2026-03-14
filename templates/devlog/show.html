@@ -36,7 +36,7 @@
     <h1 class="doc-page__title">{{.Content.Title}}</h1>
 
     <p class="doc-page__meta">
-      {{forge_date .Content.PublishedAt}}
+      {{if not .Content.PublishedAt.IsZero}}{{forge_date .Content.PublishedAt}}{{end}}
       {{range .Content.Tags}}<span class="badge">{{.}}</span> {{end}}
     </p>
 
