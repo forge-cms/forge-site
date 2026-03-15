@@ -11,7 +11,7 @@ type DocPage struct {
 	Title   string `forge:"required,min=3" db:"title"`
 	Body    string `forge:"required"       db:"body"`
 	Section string `db:"section"`
-	Order   int    `db:"order"`
+	Order   int    `db:"sort_order"`
 }
 
 func (d *DocPage) Head() forge.Head {

@@ -33,7 +33,7 @@ func migrateDB(db *sql.DB) error {
 			title        TEXT NOT NULL,
 			body         TEXT NOT NULL,
 			section      TEXT NOT NULL DEFAULT '',
-			"order"      INTEGER NOT NULL DEFAULT 0
+			sort_order   INTEGER NOT NULL DEFAULT 0
 		)`,
 	}
 	for _, s := range stmts {

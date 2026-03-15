@@ -276,3 +276,19 @@ making the admin API effectively unauthenticated.
 **Amended by S10 (v1.0.8):** `app.Use(forge.Authenticate(...))` removed —
 forge v1.0.8 wires BearerHMAC authentication automatically inside `forge.New()`
 when `Config.Secret` is set. `go.mod` updated to v1.0.8.
+
+---
+
+### Amendment S11 — Rename DocPage.Order column to sort_order (amends D1, S4)
+
+**Problem:** `"order"` is a reserved SQL keyword. `SQLRepo` generates
+`INSERT`/`UPDATE` SQL without quoting column names, causing a syntax error when
+saving any `DocPage`.
+
+**Decision:** Rename the column to `sort_order` in both the `db` struct tag
+(`docpage.go`) and the `CREATE TABLE` statement (`schema.go`). No quoting
+required.
+
+**Consequences:** `docpage.go` (`db:"sort_order"`), `schema.go` (`sort_order`
+column). Existing database volumes must be reset: `docker-compose down -v &&
+docker-compose up -d --build`.
