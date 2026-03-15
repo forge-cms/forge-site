@@ -261,3 +261,14 @@ banner required.
 
 **Consequences:** `base.html` (Plausible script tag). Superseded when
 `forge.Analytics` ships (Phase 2).
+
+---
+
+### Amendment S10 — Wire Authenticate middleware (amends D1, D3)
+
+**Decision:** `app.Use(forge.Authenticate(forge.BearerHMAC(secret)))` added to
+`main.go` after `forge.New()` and before `app.Health()`. Without this line all
+requests were treated as `GuestUser` regardless of the `Authorization` header,
+making the admin API effectively unauthenticated.
+
+**Consequences:** `main.go` (one line added). No template or CSS changes.
