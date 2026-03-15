@@ -29,6 +29,7 @@ PROJECT_BRIEF.md to restore full context.
 - S12: forge_markdown active in v1.0.9; show templates already correct
 - S13: Docker user 1000:1000 to fix volume permission errors
 - S14: forge upgraded to v1.0.10
+- S15: forge upgraded to v1.0.11
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -37,7 +38,7 @@ PROJECT_BRIEF.md to restore full context.
 - AppSchema + OGDefaults backlog entries ✅ sent
 
 ## Forge version in use
-github.com/forge-cms/forge v1.0.10
+github.com/forge-cms/forge v1.0.11
 
 ## Next up (backlog)
 - Markdown rendering — `{{ .Item.Body | markdown }}` in show templates

@@ -326,3 +326,12 @@ write to the mounted volume without a manual `chown` step.
 No template or code changes required.
 
 **Consequences:** `go.mod` / `go.sum` updated.
+
+---
+
+### Amendment S15 — Upgrade forge to v1.0.11 (amends D3)
+
+**Decision:** Upgrade `github.com/forge-cms/forge` from v1.0.10 to v1.0.11.
+No template or code changes required.
+
+**Consequences:** `go.mod` / `go.sum` updated.
