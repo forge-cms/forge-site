@@ -83,8 +83,6 @@ func main() {
 		HTTPS:   strings.HasPrefix(baseURL, "https"),
 	})
 
-	app.Use(forge.Authenticate(forge.BearerHMAC(secret)))
-
 	app.Health()
 
 	// Override MIME type for CSS files — Windows registry maps .css to

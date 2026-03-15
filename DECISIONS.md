@@ -272,3 +272,7 @@ requests were treated as `GuestUser` regardless of the `Authorization` header,
 making the admin API effectively unauthenticated.
 
 **Consequences:** `main.go` (one line added). No template or CSS changes.
+
+**Amended by S10 (v1.0.8):** `app.Use(forge.Authenticate(...))` removed —
+forge v1.0.8 wires BearerHMAC authentication automatically inside `forge.New()`
+when `Config.Secret` is set. `go.mod` updated to v1.0.8.
