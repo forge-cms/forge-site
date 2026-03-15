@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-14
+Last updated: 2026-03-15
 
 ---
 
@@ -16,24 +16,24 @@ Last updated: 2026-03-14
 
 ## Up next
 
-### Analytics
+### Deployment
 
-- [ ] Choose provider (Plausible / Umami / Fathom)
-- [ ] Add `<script defer>` to `base.html` + 4 module templates
-- [ ] Record as Amendment S1 (D8)
+- [ ] Provision Hetzner CX23 server
+- [ ] Set up Docker, Caddy, domain DNS
+- [ ] Replace `DOMAIN_PLACEHOLDER` in `Caddyfile` with `forge-cms.dev`
+- [ ] TLS live, domain pointed
 
 ---
 
 ## Backlog
 
-- [ ] Deployment — Hetzner server provisioned, Docker volume, TLS live, domain pointed
-  > Note: replace `DOMAIN_PLACEHOLDER` in `Caddyfile` with `forge-cms.dev`
 - [ ] Launch — seed data complete, `llms.txt` verified, sitemap verified, go live
 
 ---
 
 ## Done
 
+- [x] Analytics — Plausible Cloud added to `base.html`, Amendment S1 — 2026-03-15
 - [x] Static assets — `io/fs.Sub` + `http.FileServerFS` wired; `tokens.css`, `base.css`, `components.css` all return 200 — 2026-03-14
 - [ ] Deployment — Hetzner server provisioned, Docker volume, TLS live, domain pointed
   > Note: replace `DOMAIN_PLACEHOLDER` in `Caddyfile` with `forge-cms.dev`

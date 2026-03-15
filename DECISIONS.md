@@ -249,3 +249,15 @@ titles and descriptions. Organization JSON-LD hardcoded in `base.html` —
 when `forge.AppSchema{}` ships (Phase 2).
 
 **Consequences:** `main.go` (HeadFunc on both modules), `base.html` (JSON-LD script).
+
+---
+
+### Amendment S1 — Analytics provider: Plausible Cloud (amends D8)
+
+**Decision:** Plausible Cloud selected as analytics provider. Script injected in
+`templates/base.html` inside `<head>`. Uses `async` (equivalent to D8's `defer`
+for end-of-head placement). Cookieless, EU-hosted, GDPR-compliant — no consent
+banner required.
+
+**Consequences:** `base.html` (Plausible script tag). Superseded when
+`forge.Analytics` ships (Phase 2).

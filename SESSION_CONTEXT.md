@@ -13,7 +13,7 @@ PROJECT_BRIEF.md to restore full context.
 - Deployment sprint: 🔲 not started
 
 ## Latest amendments
-- S1: analytics provider (pending — not yet chosen)
+- S1: Plausible Cloud analytics added to base.html ✅
 - S2: Dockerfile Go 1.26 + build flags
 - S3: docker-compose topology (Caddy on host, loopback bind)
 - S4: Tags JSON storage, pointer types throughout
