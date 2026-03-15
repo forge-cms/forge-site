@@ -292,3 +292,15 @@ required.
 **Consequences:** `docpage.go` (`db:"sort_order"`), `schema.go` (`sort_order`
 column). Existing database volumes must be reset: `docker-compose down -v &&
 docker-compose up -d --build`.
+
+---
+
+### Amendment S12 — Markdown rendering via forge_markdown in show templates (amends D3)
+
+**Decision:** forge v1.0.9 activates `forge_markdown` in `forge.TemplateFuncMap()`.
+Both `templates/devlog/show.html` and `templates/docs/show.html` already call
+`{{forge_markdown .Content.Body}}` inside `<div class="prose">` — no template
+changes required. Forge injects `TemplateFuncMap()` internally when parsing
+module templates via `forge.Templates()`.
+
+**Consequences:** `go.mod` updated to v1.0.9. Body fields now render as HTML.

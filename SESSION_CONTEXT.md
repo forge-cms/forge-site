@@ -26,6 +26,7 @@ PROJECT_BRIEF.md to restore full context.
 - S9: HeadFunc for list pages + Organization JSON-LD workaround
 - S10: Authenticate middleware wired (v1.0.7), removed in v1.0.8 (auto-wired)
 - S11: DocPage.Order renamed to sort_order (reserved SQL keyword)
+- S12: forge_markdown active in v1.0.9; show templates already correct
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -34,7 +35,7 @@ PROJECT_BRIEF.md to restore full context.
 - AppSchema + OGDefaults backlog entries ✅ sent
 
 ## Forge version in use
-github.com/forge-cms/forge v1.0.8
+github.com/forge-cms/forge v1.0.9
 
 ## Next up (backlog)
 - Markdown rendering — `{{ .Item.Body | markdown }}` in show templates
