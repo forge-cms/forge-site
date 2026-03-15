@@ -16,28 +16,26 @@ Last updated: 2026-03-15
 
 ## Up next
 
-### Deployment
-
-- [ ] Provision Hetzner CX23 server
-- [ ] Set up Docker, Caddy, domain DNS
-- [ ] Replace `DOMAIN_PLACEHOLDER` in `Caddyfile` with `forge-cms.dev`
-- [ ] TLS live, domain pointed
-
 ---
 
 ## Backlog
 
-- [ ] Launch — seed data complete, `llms.txt` verified, sitemap verified, go live
+- [ ] Markdown rendering — Body field renders raw markdown; needs markdown→HTML
+  in templates via `forge.TemplateFuncMap` (Amendment A46 in core, then
+  wire `{{ .Item.Body | markdown }}` in devlog/docs show templates)
+- [ ] Health check — Caddy `health_uri` removed as workaround; Forge HTTPS
+  redirect breaks internal `/_health` calls (Amendment S10 context)
+- [ ] ADMIN_TOKEN — set a persistent token in `.env` so it survives restarts
+  without re-fetching from logs
 
 ---
 
 ## Done
 
+- [x] Launch — 6 content items published (3 devlog + 3 docs), `llms.txt` and sitemap verified — 2026-03-15
+- [x] Deployment — Hetzner CX23 provisioned, Docker volume, TLS live via Caddy, `forge-cms.dev` DNS pointed — 2026-03-15
 - [x] Analytics — Plausible Cloud added to `base.html`, Amendment S1 — 2026-03-15
 - [x] Static assets — `io/fs.Sub` + `http.FileServerFS` wired; `tokens.css`, `base.css`, `components.css` all return 200 — 2026-03-14
-- [ ] Deployment — Hetzner server provisioned, Docker volume, TLS live, domain pointed
-  > Note: replace `DOMAIN_PLACEHOLDER` in `Caddyfile` with `forge-cms.dev`
-- [ ] Launch — seed data complete, `llms.txt` verified, sitemap verified, go live
 
 ---
 

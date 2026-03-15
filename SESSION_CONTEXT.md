@@ -10,7 +10,9 @@ PROJECT_BRIEF.md to restore full context.
 - Favicon + OG + JSON-LD + Twitter meta: ✅ done
 - Logo assets (Affinity): ✅ done
 - Social profiles updated: ✅ done
-- Deployment sprint: 🔲 not started
+- Analytics: ✅ Plausible Cloud live
+- Deployment sprint: ✅ live at forge-cms.dev
+- Launch: ✅ 6 content items published
 
 ## Latest amendments
 - S1: Plausible Cloud analytics added to base.html ✅
@@ -22,6 +24,8 @@ PROJECT_BRIEF.md to restore full context.
 - S7: Author and Published fields in Head()
 - S8: OG image fallback in base.html (workaround)
 - S9: HeadFunc for list pages + Organization JSON-LD workaround
+- S10: Authenticate middleware wired (v1.0.7), removed in v1.0.8 (auto-wired)
+- S11: DocPage.Order renamed to sort_order (reserved SQL keyword)
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -30,20 +34,12 @@ PROJECT_BRIEF.md to restore full context.
 - AppSchema + OGDefaults backlog entries ✅ sent
 
 ## Forge version in use
-github.com/forge-cms/forge v1.0.6
+github.com/forge-cms/forge v1.0.8
 
-## Pending before deployment
-- Choose analytics provider → Amendment S1
-- Write and publish content (6 items: 3 devlog + 3 docs) via post.http against prod
-- Deployment sprint: Hetzner CX23, Docker, Caddy, domain DNS
-
-## Content ready to publish (post to prod after go-live)
-- Post 1: Why I built Forge (why-i-built-forge)
-- Post 2: Forge v1.0.0 — what shipped (forge-v1-0-0)
-- Post 3: forge-cms.dev is built with Forge (forge-cms-dev-is-built-with-forge)
-- Doc 1: Getting Started (getting-started) — Section: Guides, Order: 1
-- Doc 2: Content Types (content-types) — Section: Guides, Order: 2
-- Doc 3: Content Lifecycle (content-lifecycle) — Section: Guides, Order: 3
+## Next up (backlog)
+- Markdown rendering — `{{ .Item.Body | markdown }}` in show templates
+- Health check — Caddy `health_uri` workaround (HTTPS redirect issue)
+- ADMIN_TOKEN — persist in `.env`
 
 ## Design decisions (locked)
 - Font: JetBrains Mono via Bunny Fonts (not Google Fonts)
