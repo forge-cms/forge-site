@@ -304,3 +304,25 @@ changes required. Forge injects `TemplateFuncMap()` internally when parsing
 module templates via `forge.Templates()`.
 
 **Consequences:** `go.mod` updated to v1.0.9. Body fields now render as HTML.
+
+---
+
+### Amendment S13 — Docker container user 1000:1000 (amends D5)
+
+**Problem:** The `forge_data` volume was owned by root after first creation,
+causing the app container to fail to write `forge.db` at startup.
+
+**Decision:** Add `user: "1000:1000"` to the `app` service in
+`docker-compose.yml`. The container runs as uid 1000 from the start and can
+write to the mounted volume without a manual `chown` step.
+
+**Consequences:** `docker-compose.yml` (`user: "1000:1000"` on app service).
+
+---
+
+### Amendment S14 — Upgrade forge to v1.0.10 (amends D3)
+
+**Decision:** Upgrade `github.com/forge-cms/forge` from v1.0.9 to v1.0.10.
+No template or code changes required.
+
+**Consequences:** `go.mod` / `go.sum` updated.
