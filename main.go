@@ -6,7 +6,9 @@ import (
 	"database/sql"
 	"embed"
 	"html/template"
+	"io/fs"
 	"log"
+	"mime"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -82,6 +84,18 @@ func main() {
 	})
 
 	app.Health()
+
+	// Override MIME type for CSS files — Windows registry maps .css to
+	// text/plain which causes browsers to reject stylesheets. This is a
+	// no-op on Linux/Docker but required for local development on Windows.
+	_ = mime.AddExtensionType(".css", "text/css")
+
+	staticFS, err := fs.Sub(static, "static")
+	if err != nil {
+		log.Fatalf("forge-site: static sub: %v", err)
+	}
+	app.Handle("GET /static/", http.StripPrefix("/static/", http.FileServerFS(staticFS)))
+
 	app.SEO(&forge.RobotsConfig{Sitemaps: true})
 
 	app.Content(forge.NewModule((*Post)(nil),
@@ -93,6 +107,13 @@ func main() {
 		forge.Feed(forge.FeedConfig{Title: "Forge Devlog"}),
 		forge.AIIndex(forge.LLMsTxt, forge.LLMsTxtFull, forge.AIDoc),
 		forge.Cache(5*time.Minute),
+		forge.HeadFunc(func(_ forge.Context, _ []*Post) forge.Head {
+			return forge.Head{
+				Title:       "Devlog — Forge",
+				Description: "Engineering notes and release announcements from the Forge team.",
+				Canonical:   forge.URL("/devlog"),
+			}
+		}),
 	))
 
 	app.Content(forge.NewModule((*DocPage)(nil),
@@ -102,6 +123,13 @@ func main() {
 		forge.SitemapConfig{},
 		forge.AIIndex(forge.LLMsTxt, forge.LLMsTxtFull, forge.AIDoc),
 		forge.Cache(10*time.Minute),
+		forge.HeadFunc(func(_ forge.Context, _ []*DocPage) forge.Head {
+			return forge.Head{
+				Title:       "Docs — Forge",
+				Description: "Documentation for the Forge Go web framework.",
+				Canonical:   forge.URL("/docs"),
+			}
+		}),
 	))
 
 	hostname := strings.TrimPrefix(strings.TrimPrefix(baseURL, "https://"), "http://")

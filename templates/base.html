@@ -13,15 +13,31 @@
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="{{.Head.Canonical}}">
 
-  {{/* Google Fonts */}}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400&display=swap">
+  {{/* Fonts */}}
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,600|inter:300,400&display=swap">
+
+  {{/* Favicon */}}
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+
+  {{/* OG image fallback */}}
+  <meta property="og:image" content="https://forge-cms.dev/static/Forge-logo-OG1200.png">
+
+  {{/* Twitter */}}
+  <meta name="twitter:site" content="@forge_cms">
+  <meta name="twitter:creator" content="@forge_cms">
 
   {{/* Styles */}}
   <link rel="stylesheet" href="/static/css/tokens.css">
   <link rel="stylesheet" href="/static/css/base.css">
   <link rel="stylesheet" href="/static/css/components.css">
+
+  {{/* WORKAROUND S9: remove when forge.AppSchema{} ships (Phase 2) */}}
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Forge","url":"https://forge-cms.dev","description":"The Go web framework built for the age of AI","logo":{"@type":"ImageObject","url":"https://forge-cms.dev/static/Forge-logo-OG1200.png"}}
+  </script>
 </head>
 <body>
 

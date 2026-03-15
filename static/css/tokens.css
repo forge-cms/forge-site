@@ -15,8 +15,8 @@
 
   /* Text */
   --text:          #dde1e7;
-  --text-muted:    #6b7280;
-  --text-dim:      #3d4450;
+  --text-muted:    #9ca3af;
+  --text-dim:      #6b7280;
 
   /* Accent */
   --accent:        #e8702f;
@@ -29,6 +29,11 @@
   /* Typography */
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
   --sans: 'Inter', system-ui, sans-serif;
+
+  /* Font sizes */
+  --text-sm:   0.9rem;
+  --text-base: 1.05rem;
+  --text-lg:   1.15rem;
 
   /* Spacing scale */
   --space-1:  0.25rem;

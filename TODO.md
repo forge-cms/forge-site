@@ -16,16 +16,16 @@ Last updated: 2026-03-14
 
 ## Up next
 
-### Static assets
+### Analytics
 
-- [ ] Verify `tokens.css`, `base.css`, `components.css` are served correctly via `//go:embed static`
-- [ ] Smoke-test all five routes in a browser; confirm fonts load and layout renders
+- [ ] Choose provider (Plausible / Umami / Fathom)
+- [ ] Add `<script defer>` to `base.html` + 4 module templates
+- [ ] Record as Amendment S1 (D8)
 
 ---
 
 ## Backlog
 
-- [ ] Analytics — choose provider (Plausible / Umami / Fathom), add `<script defer>` to all five templates, record as Amendment S1 (D8)
 - [ ] Deployment — Hetzner server provisioned, Docker volume, TLS live, domain pointed
   > Note: replace `DOMAIN_PLACEHOLDER` in `Caddyfile` with `forge-cms.dev`
 - [ ] Launch — seed data complete, `llms.txt` verified, sitemap verified, go live
@@ -33,6 +33,15 @@ Last updated: 2026-03-14
 ---
 
 ## Done
+
+- [x] Static assets — `io/fs.Sub` + `http.FileServerFS` wired; `tokens.css`, `base.css`, `components.css` all return 200 — 2026-03-14
+- [ ] Deployment — Hetzner server provisioned, Docker volume, TLS live, domain pointed
+  > Note: replace `DOMAIN_PLACEHOLDER` in `Caddyfile` with `forge-cms.dev`
+- [ ] Launch — seed data complete, `llms.txt` verified, sitemap verified, go live
+
+---
+
+## [Older Done entries below]
 
 - [x] Templates — `base.html`, `home.html`, devlog + docs list/show; home handler wired; `forge.Templates` promoted; amendments S5+S6 — 2026-03-14
 - [x] Content types — `post.go`, `docpage.go`, `stringslice.go`, `schema.go`, `seed.go`, main.go wired; Amendment S4 — 2026-03-14

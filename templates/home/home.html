@@ -5,28 +5,49 @@
 {{/* ── Hero ── */}}
 <section class="hero">
   <p class="hero__eyebrow">
-    forge-cms.dev
-    <span class="hero__eyebrow-sep">/</span>
-    go web framework
+    go cms framework
   </p>
   <h1 class="hero__heading anim-fade-up">
-    The framework built for<br>
-    <span class="hero__heading-accent">the age of AI.</span>
+    Forged<br>
+    <span class="hero__heading-accent">in the age of AI.</span>
   </h1>
   <p class="hero__sub anim-fade-up anim-delay-1">
-    Designed for four audiences: the developer, the AI building alongside them,
-    the human visitor, and the AI agent consuming the content.
+    For AI enhanced developers and AI empowered users. <br/>
+    Forge is a content management framework for building blazing fast, SEO and AI-friendly websites with Go and zero dependencies.
   </p>
   <div class="hero__actions anim-fade-up anim-delay-2">
     <a href="/docs/getting-started" class="btn btn--primary">get started</a>
     <a href="https://github.com/forge-cms/forge" class="btn btn--ghost" target="_blank" rel="noopener">view on github</a>
   </div>
   <div class="hero__meta anim-fade-up anim-delay-3">
-    <span>Go 1.26+</span>
+    <span>Go 1.22+</span>
     <span class="hero__meta-dot">·</span>
     <span>zero build step</span>
     <span class="hero__meta-dot">·</span>
     <span>SQLite → Postgres in one line</span>
+  </div>
+</section>
+
+{{/* ── Why Forge ── */}}
+<section class="section">
+  <p class="section__label">// why forge</p>
+  <div class="why-grid">
+    <div class="why">
+      <p class="why__key">readable by humans</p>
+      <p class="why__val">No magic. No hidden conventions. Every route, every lifecycle rule, every validation — explicit in your code. You always know what Forge is doing and why.</p>
+    </div>
+    <div class="why">
+      <p class="why__key">readable by AI</p>
+      <p class="why__val">API naming, file structure, and architecture documentation are designed for AI code generation. Copilot and Claude write idiomatic Forge code on the first try.</p>
+    </div>
+    <div class="why">
+      <p class="why__key">impossible to misuse</p>
+      <p class="why__val">Draft content never leaks. Validation always runs. Redirects are tracked automatically. The right behaviour is the only available behaviour.</p>
+    </div>
+    <div class="why">
+      <p class="why__key">built for discovery</p>
+      <p class="why__val">Canonical URLs, Open Graph, structured breadcrumbs, and RSS feeds — declared once on your content type, correct everywhere. Shareable, indexable, and consumable by search engines and AI agents out of the box.</p>
+    </div>
   </div>
 </section>
 
@@ -40,7 +61,7 @@
     </div>
     <div class="feat">
       <p class="feat__key">AI-first output</p>
-      <p class="feat__val">Every module exposes <code>/llms.txt</code>, <code>/llms-full.txt</code>, and <code>/ai-doc</code> — structured for LLM agents without extra configuration.</p>
+      <p class="feat__val">Every module exposes <code>/llms.txt</code>, <code>/llms-full.txt</code>, and <code>/aidoc</code> — structured for LLM agents without extra configuration.</p>
     </div>
     <div class="feat">
       <p class="feat__key">zero dependencies</p>
@@ -69,14 +90,17 @@
       <p class="lc__name">draft</p>
       <p class="lc__desc">Private. Only authenticated admins can read.</p>
     </div>
+    <span class="lc__arrow">→</span>
     <div class="lc__step">
       <p class="lc__name">scheduled</p>
       <p class="lc__desc">Queued for a future publish time.</p>
     </div>
+    <span class="lc__arrow">→</span>
     <div class="lc__step lc__step--active">
       <p class="lc__name">published</p>
       <p class="lc__desc">Live. Included in feeds, sitemap, and AI index.</p>
     </div>
+    <span class="lc__arrow">→</span>
     <div class="lc__step">
       <p class="lc__name">archived</p>
       <p class="lc__desc">Hidden from lists. Canonical URL still resolves.</p>

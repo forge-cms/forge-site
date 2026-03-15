@@ -223,3 +223,29 @@ via `os.Stat` + `template.ParseFiles`. There is no `embed.FS` support in
 (no hidden files remain). Any nav/footer/head change must be applied in five
 places: `base.html` + `devlog/list.html` + `devlog/show.html` +
 `docs/list.html` + `docs/show.html` (per S6).
+
+---
+
+### Amendment S8 — OG image fallback workaround (amends D3)
+
+**Decision:** Forge v1.0.6 does not support app-level OG image fallback.
+The static fallback `og:image` is hardcoded in templates as a workaround.
+
+| Template | Approach |
+|----------|----------|
+| `base.html` | Static `<meta property="og:image">` hardcoded directly (no dynamic Head) |
+| 4 module templates | Conditional fallback after `{{template "forge:head" .Head}}`: `{{if not .Head.Image.URL}}` |
+
+**Consequences:** All five templates carry the `og:image` fallback. Removed when
+`forge.OGDefaults{}` ships (Phase 2 — tracked in forge BACKLOG.md).
+
+---
+
+### Amendment S9 — HeadFunc for list pages and Organization JSON-LD (amends D3, D7)
+
+**Decision:** `HeadFunc` added to Post and DocPage modules so list pages have
+titles and descriptions. Organization JSON-LD hardcoded in `base.html` —
+`forge.Handle` routes cannot use `SchemaFor` (Forge core limitation). Removed
+when `forge.AppSchema{}` ships (Phase 2).
+
+**Consequences:** `main.go` (HeadFunc on both modules), `base.html` (JSON-LD script).
