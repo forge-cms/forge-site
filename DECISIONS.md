@@ -354,3 +354,19 @@ S8). `og:type` is `article` for both types.
 
 **Consequences:** `templates/devlog/show.html` and `templates/docs/show.html`
 (10 meta lines added each). Superseded by shared partials in Phase 2.
+
+---
+
+### Amendment S17 — Add twitter:card override in show templates (amends S16)
+
+**Problem:** `forge:head` emits `twitter:card` as `summary`. The S16 block adds
+`twitter:image` but without overriding `twitter:card`, X/Twitter ignores the
+image and renders the small card format.
+
+**Decision:** Add `<meta name="twitter:card" content="summary_large_image">`
+to the S16 block in both `templates/devlog/show.html` and
+`templates/docs/show.html`, immediately before `twitter:image`. The later tag
+overrides the `summary` emitted by `forge:head`.
+
+**Consequences:** `templates/devlog/show.html` and `templates/docs/show.html`
+(one line added each).
