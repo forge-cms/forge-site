@@ -370,3 +370,16 @@ overrides the `summary` emitted by `forge:head`.
 
 **Consequences:** `templates/devlog/show.html` and `templates/docs/show.html`
 (one line added each).
+
+---
+
+### Amendment S18 — Upgrade forge to v1.1.1, remove S16/S17 OG workarounds (amends S16, S17)
+
+**Decision:** forge v1.1.1 fixes `forge:head` to emit absolute `og:url`,
+`og:image`, and `twitter:card: summary_large_image` natively when `Type:
+forge.Article` is set. The S16 and S17 workaround blocks (og:url, og:image,
+twitter:card, twitter:image overrides) are removed from both show templates.
+
+**Consequences:** `go.mod` / `go.sum` updated to v1.1.1. S16/S17 override
+blocks removed from `templates/devlog/show.html` and
+`templates/docs/show.html`.

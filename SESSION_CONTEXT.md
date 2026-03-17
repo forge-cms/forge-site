@@ -31,6 +31,8 @@ PROJECT_BRIEF.md to restore full context.
 - S14: forge upgraded to v1.0.10
 - S15: forge upgraded to v1.0.11
 - S16: OG + Twitter Card tags added to devlog/docs show templates (S8 workaround extended)
+- S17: twitter:card override attempted (first-tag-wins limitation discovered)
+- S18: forge v1.1.1 — og:url/og:image/twitter:card now correct in forge:head; S16+S17 workarounds removed
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -39,7 +41,7 @@ PROJECT_BRIEF.md to restore full context.
 - AppSchema + OGDefaults backlog entries ✅ sent
 
 ## Forge version in use
-github.com/forge-cms/forge v1.0.11
+github.com/forge-cms/forge v1.1.1
 
 ## Next up (backlog)
 - Markdown rendering — `{{ .Item.Body | markdown }}` in show templates
