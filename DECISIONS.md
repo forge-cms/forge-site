@@ -413,3 +413,17 @@ Bearer token for MCP endpoint testing.
 
 **Consequences:** `go.mod`/`go.sum` updated. AI assistants can query and
 manage devlog posts and docs pages via the MCP protocol.
+
+---
+
+### Amendment S21 — cmd/mcp — stdio-to-SSE proxy for Claude Desktop
+
+**Decision:** Add `cmd/mcp/main.go` — a stdlib-only binary that Claude Desktop
+launches as a child process. It reads newline-delimited JSON-RPC from stdin,
+POSTs each message to `https://forge-cms.dev/mcp/message` with
+`Authorization: Bearer $MCP_TOKEN`, and writes the JSON response to stdout.
+Builds to `forge-mcp-proxy.exe` via `go build -o forge-mcp-proxy.exe ./cmd/mcp/`.
+No external dependencies. `forge-mcp-proxy.exe` is gitignored (build artefact).
+
+**Consequences:** `cmd/mcp/main.go` added. Claude Desktop `mcpServers` config
+points to the local exe with `MCP_TOKEN` env var.
