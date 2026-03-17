@@ -19,7 +19,8 @@ func (d *DocPage) Head() forge.Head {
 		Title:       d.Title + " — Forge Docs",
 		Description: forge.Excerpt(d.Body, 160),
 		Type:        forge.Article,
-		Canonical:   forge.URL("/docs/", d.Slug),
+		Canonical:   siteBaseURL + forge.URL("/docs/", d.Slug),
+		Image:       forge.Image{URL: siteBaseURL + "/static/Forge-logo-OG1200.png", Alt: "Forge", Width: 1200, Height: 630},
 		Breadcrumbs: forge.Crumbs(
 			forge.Crumb("Home", "/"),
 			forge.Crumb("Docs", "/docs"),

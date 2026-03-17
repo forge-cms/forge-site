@@ -28,6 +28,11 @@ var static embed.FS
 // Version is set at build time via -ldflags "-X main.Version=x.y.z".
 var Version string
 
+// siteBaseURL is the canonical origin (e.g. "https://forge-cms.dev") used to
+// build absolute og:url and og:image values. Set once at startup from the
+// BASE_URL env var before any module Head() method is called.
+var siteBaseURL string
+
 // homeData is the template data passed to templates/home/home.html.
 // It mirrors forge.TemplateData but without generic type constraints so
 // the home handler can be wired with a plain http.Handler.
@@ -41,6 +46,7 @@ type homeData struct {
 func main() {
 	secret := requireEnv("SECRET")
 	baseURL := envOr("BASE_URL", "http://localhost:8080")
+	siteBaseURL = baseURL
 	dbPath := envOr("DATABASE_PATH", "./data/forge.db")
 	port := envOr("PORT", "8080")
 
@@ -111,7 +117,7 @@ func main() {
 			return forge.Head{
 				Title:       "Devlog — Forge",
 				Description: "Engineering notes and release announcements from the Forge team.",
-				Canonical:   forge.URL("/devlog"),
+				Canonical:   baseURL + forge.URL("/devlog"),
 			}
 		}),
 	))
@@ -127,7 +133,7 @@ func main() {
 			return forge.Head{
 				Title:       "Docs — Forge",
 				Description: "Documentation for the Forge Go web framework.",
-				Canonical:   forge.URL("/docs"),
+				Canonical:   baseURL + forge.URL("/docs"),
 			}
 		}),
 	))

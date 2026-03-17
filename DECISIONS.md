@@ -383,3 +383,20 @@ twitter:card, twitter:image overrides) are removed from both show templates.
 **Consequences:** `go.mod` / `go.sum` updated to v1.1.1. S16/S17 override
 blocks removed from `templates/devlog/show.html` and
 `templates/docs/show.html`.
+
+---
+
+### Amendment S19 — Absolute og:url + og:image via siteBaseURL package var (amends S18)
+
+**Context:** Despite S18, forge:head still emits the `Canonical` value
+verbatim. Since `forge.URL()` returns a root-relative path, `og:url` was
+still relative. No `og:image` was emitted because `Head.Image` was zero.
+
+**Decision:** Introduce a package-level `var siteBaseURL string` in `main.go`,
+set to `BASE_URL` at startup. `post.go` and `docpage.go` `Head()` methods
+prefix `Canonical` with `siteBaseURL` and populate `Head.Image` with the
+existing `static/Forge-logo-OG1200.png` asset (1200×630). List page
+`HeadFunc` canonicals updated to use `baseURL + forge.URL(...)` via closure.
+
+**Consequences:** `og:url` now emits an absolute URL; `og:image`, `og:image:width`,
+and `og:image:height` tags now appear on all content pages.

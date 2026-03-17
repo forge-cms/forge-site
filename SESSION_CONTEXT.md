@@ -33,6 +33,7 @@ PROJECT_BRIEF.md to restore full context.
 - S16: OG + Twitter Card tags added to devlog/docs show templates (S8 workaround extended)
 - S17: twitter:card override attempted (first-tag-wins limitation discovered)
 - S18: forge v1.1.1 — og:url/og:image/twitter:card now correct in forge:head; S16+S17 workarounds removed
+- S19: siteBaseURL package var — Head() Canonical now absolute; Head.Image set to Forge-logo-OG1200.png (1200×630); og:url and og:image now present
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent

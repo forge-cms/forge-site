@@ -19,7 +19,8 @@ func (p *Post) Head() forge.Head {
 		Description: forge.Excerpt(p.Body, 160),
 		Tags:        []string(p.Tags),
 		Type:        forge.Article,
-		Canonical:   forge.URL("/devlog/", p.Slug),
+		Canonical:   siteBaseURL + forge.URL("/devlog/", p.Slug),
+		Image:       forge.Image{URL: siteBaseURL + "/static/Forge-logo-OG1200.png", Alt: "Forge", Width: 1200, Height: 630},
 		Breadcrumbs: forge.Crumbs(
 			forge.Crumb("Home", "/"),
 			forge.Crumb("Devlog", "/devlog"),
