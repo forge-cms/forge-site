@@ -335,3 +335,22 @@ No template or code changes required.
 No template or code changes required.
 
 **Consequences:** `go.mod` / `go.sum` updated.
+
+---
+
+### Amendment S16 — OG and Twitter Card tags in module show templates (amends S8)
+
+**Problem:** `forge:head` emits only `<title>`, `<meta name="description">`,
+and `<link rel="canonical">`. Module show templates are standalone documents
+that do not extend `base.html` (Amendment S6), so `base.html`'s OG block
+never renders for `/devlog/{slug}` or `/docs/{slug}` pages.
+
+**Decision:** Add explicit `og:*` and `twitter:*` meta tags to
+`templates/devlog/show.html` and `templates/docs/show.html`, immediately after
+`{{template "forge:head" .Head}}`. Data pulled from `.Head.Title`,
+`.Head.Description`, and `.Head.Canonical` — all correctly populated by
+`Post.Head()` / `DocPage.Head()`. OG image uses site-level fallback (same as
+S8). `og:type` is `article` for both types.
+
+**Consequences:** `templates/devlog/show.html` and `templates/docs/show.html`
+(10 meta lines added each). Superseded by shared partials in Phase 2.

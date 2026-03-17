@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{template "forge:head" .Head}}
+  {{/* OG + Twitter Card — S16 workaround until shared partials (Phase 2) */}}
+  <meta property="og:title"       content="{{.Head.Title}}">
+  <meta property="og:description" content="{{.Head.Description}}">
+  <meta property="og:type"        content="article">
+  <meta property="og:url"         content="{{.Head.Canonical}}">
+  <meta property="og:image"       content="https://forge-cms.dev/static/Forge-logo-OG1200.png">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="{{.Head.Title}}">
+  <meta name="twitter:description" content="{{.Head.Description}}">
+  <meta name="twitter:image"       content="https://forge-cms.dev/static/Forge-logo-OG1200.png">
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link rel="stylesheet" href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,600|inter:300,400&display=swap">
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">

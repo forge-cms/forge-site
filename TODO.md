@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-15
+Last updated: 2026-03-17
 
 ---
 
@@ -32,6 +32,7 @@ Last updated: 2026-03-15
 
 ## Done
 
+- [x] OG + Twitter Card on show pages — missing meta added to devlog/docs show templates, Amendment S16 — 2026-03-17
 - [x] Launch — 6 content items published (3 devlog + 3 docs), `llms.txt` and sitemap verified — 2026-03-15
 - [x] Deployment — Hetzner CX23 provisioned, Docker volume, TLS live via Caddy, `forge-cms.dev` DNS pointed — 2026-03-15
 - [x] Analytics — Plausible Cloud added to `base.html`, Amendment S1 — 2026-03-15

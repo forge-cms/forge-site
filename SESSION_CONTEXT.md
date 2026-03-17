@@ -30,6 +30,7 @@ PROJECT_BRIEF.md to restore full context.
 - S13: Docker user 1000:1000 to fix volume permission errors
 - S14: forge upgraded to v1.0.10
 - S15: forge upgraded to v1.0.11
+- S16: OG + Twitter Card tags added to devlog/docs show templates (S8 workaround extended)
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
