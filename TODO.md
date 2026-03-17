@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-17 (S19)
+Last updated: 2026-03-17 (S20)
 
 ---
 
@@ -21,6 +21,8 @@ Last updated: 2026-03-17 (S19)
 ## Done
 
 - [x] Fix absolute og:url and add og:image (S19) — 2026-03-17
+- [x] Wire forge-mcp — MCP read+write endpoints (S20) — 2026-03-17
+- [x] Wire forge-mcp — MCP read+write endpoints (S20) — 2026-03-17
 
 ## Backlog
 

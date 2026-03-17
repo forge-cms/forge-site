@@ -400,3 +400,16 @@ existing `static/Forge-logo-OG1200.png` asset (1200×630). List page
 
 **Consequences:** `og:url` now emits an absolute URL; `og:image`, `og:image:width`,
 and `og:image:height` tags now appear on all content pages.
+
+---
+
+### Amendment S20 — forge-mcp wired — MCP read+write for Post and DocPage
+
+**Decision:** Add `github.com/forge-cms/forge/forge-mcp v1.0.0` as a direct
+dependency. Wire `forge.MCP(forge.MCPRead, forge.MCPWrite)` on both the Post
+and DocPage modules. Mount `forgemcp.New(app)` at `GET /mcp` (SSE) and
+`POST /mcp/message`. Add a temporary startup log printing a non-expiring admin
+Bearer token for MCP endpoint testing.
+
+**Consequences:** `go.mod`/`go.sum` updated. AI assistants can query and
+manage devlog posts and docs pages via the MCP protocol.

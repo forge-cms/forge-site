@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/forge-cms/forge"
+	forgemcp "github.com/forge-cms/forge/forge-mcp"
 	_ "modernc.org/sqlite"
 )
 
@@ -89,6 +90,14 @@ func main() {
 		HTTPS:   strings.HasPrefix(baseURL, "https"),
 	})
 
+	// Temporary: log a non-expiring admin token for MCP testing (S20).
+	if mcpToken, err := forge.SignToken(
+		forge.User{ID: "admin", Roles: []forge.Role{forge.Admin}},
+		secret, 0,
+	); err == nil {
+		log.Printf("MCP Bearer token: %s", mcpToken)
+	}
+
 	app.Health()
 
 	// Override MIME type for CSS files — Windows registry maps .css to
@@ -112,6 +121,7 @@ func main() {
 		forge.Social(forge.OpenGraph, forge.TwitterCard),
 		forge.Feed(forge.FeedConfig{Title: "Forge Devlog"}),
 		forge.AIIndex(forge.LLMsTxt, forge.LLMsTxtFull, forge.AIDoc),
+		forge.MCP(forge.MCPRead, forge.MCPWrite),
 		forge.Cache(5*time.Minute),
 		forge.HeadFunc(func(_ forge.Context, _ []*Post) forge.Head {
 			return forge.Head{
@@ -128,6 +138,7 @@ func main() {
 		forge.Templates("templates/docs"),
 		forge.SitemapConfig{},
 		forge.AIIndex(forge.LLMsTxt, forge.LLMsTxtFull, forge.AIDoc),
+		forge.MCP(forge.MCPRead, forge.MCPWrite),
 		forge.Cache(10*time.Minute),
 		forge.HeadFunc(func(_ forge.Context, _ []*DocPage) forge.Head {
 			return forge.Head{
@@ -137,6 +148,10 @@ func main() {
 			}
 		}),
 	))
+
+	mcpSrv := forgemcp.New(app)
+	app.Handle("GET /mcp", mcpSrv.Handler())
+	app.Handle("POST /mcp/message", mcpSrv.Handler())
 
 	hostname := strings.TrimPrefix(strings.TrimPrefix(baseURL, "https://"), "http://")
 	app.Handle("GET /", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

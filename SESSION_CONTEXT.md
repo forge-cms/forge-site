@@ -34,6 +34,7 @@ PROJECT_BRIEF.md to restore full context.
 - S17: twitter:card override attempted (first-tag-wins limitation discovered)
 - S18: forge v1.1.1 — og:url/og:image/twitter:card now correct in forge:head; S16+S17 workarounds removed
 - S19: siteBaseURL package var — Head() Canonical now absolute; Head.Image set to Forge-logo-OG1200.png (1200×630); og:url and og:image now present
+- S20: forge-mcp v1.0.0 wired — MCP(MCPRead, MCPWrite) on Post+DocPage; GET /mcp + POST /mcp/message mounted; admin Bearer token logged at startup
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
