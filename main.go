@@ -67,7 +67,7 @@ func main() {
 		log.Fatalf("forge-site: migrate db: %v", err)
 	}
 
-	postRepo := forge.NewSQLRepo[*Post](db)
+	postRepo := &sortedPostRepo{forge.NewSQLRepo[*Post](db)}
 	docRepo := forge.NewSQLRepo[*DocPage](db)
 	seedDB(context.Background(), postRepo, docRepo)
 
