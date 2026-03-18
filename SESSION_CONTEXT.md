@@ -41,6 +41,7 @@ PROJECT_BRIEF.md to restore full context.
 - S24: BlogPosting JSON-LD in devlog/show.html + TechArticle JSON-LD in docs/show.html; forge_rfc3339 for datePublished
 - S25: Add required image field to BlogPosting JSON-LD (Google rich results eligibility)
 - S26: forge v1.1.3 — A53 content negotiation fix; crawlers now receive HTML not JSON
+- S27: Extend README with API/MCP/AI/boilerplate sections; clarify SESSION_CONTEXT.md note in copilot-instructions
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent

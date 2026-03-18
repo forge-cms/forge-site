@@ -512,3 +512,16 @@ receive JSON instead of HTML. No forge-site code changes required.
 **Consequences:** `go.mod`/`go.sum` updated. Crawlers now receive HTML,
 making rich search results (BlogPosting, TechArticle JSON-LD from S24/S25)
 visible to Google.
+
+---
+
+### Amendment S27 — Extend README and clarify copilot-instructions for external contributors
+
+**Decision:** Before the repo goes public, extend `README.md` with sections
+covering content types, the auto-generated REST API, MCP setup (Claude Desktop
+proxy), AI indexing endpoints, and boilerplate usage instructions. Also clarify
+the `SESSION_CONTEXT.md` reference in `.github/copilot-instructions.md` so its
+purpose is self-evident to external contributors.
+
+**Consequences:** `README.md` and `.github/copilot-instructions.md` updated.
+No code changes.
