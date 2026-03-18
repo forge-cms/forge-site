@@ -73,9 +73,8 @@ func main() {
 
 	// Parse the home page template once at startup.
 	// base.html + home.html are embedded in the binary via go:embed.
-	// forge:head is NOT used here — forgeHeadTmpl is package-private in
-	// the forge package. The home handler constructs <head> tags manually
-	// from homeData.Head fields. This is intentional; see Amendment S5.
+	// forge:head is not used here — the home handler constructs <head>
+	// tags manually from homeData.Head fields (no generic TemplateData[T]).
 	homeTmpl, err := template.New("").Funcs(forge.TemplateFuncMap()).
 		ParseFS(templates, "templates/base.html", "templates/home/home.html")
 	if err != nil {
@@ -90,7 +89,9 @@ func main() {
 		HTTPS:   strings.HasPrefix(baseURL, "https"),
 	})
 
-	// Temporary: log a non-expiring admin token for MCP testing (S20).
+	// MCP server token (non-expiring, Admin role). Required for Claude Desktop
+	// and other MCP clients connecting via the stdio proxy (see cmd/mcp/).
+	// Fetch after deploy: docker logs <container> 2>&1 | grep "MCP Bearer token"
 	if mcpToken, err := forge.SignToken(
 		forge.User{ID: "admin", Roles: []forge.Role{forge.Admin}},
 		secret, 0,

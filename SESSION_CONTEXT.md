@@ -37,6 +37,7 @@ PROJECT_BRIEF.md to restore full context.
 - S20: forge-mcp v1.0.0 wired — MCP(MCPRead, MCPWrite) on Post+DocPage; GET /mcp + POST /mcp/message mounted; admin Bearer token logged at startup
 - S21: cmd/mcp/main.go — stdlib stdio-to-SSE proxy for Claude Desktop; builds to forge-mcp-proxy.exe; token via MCP_TOKEN env var
 - S22: forge v1.1.2 + forge-mcp v1.0.1 — array-aware MCP tags fixed (A52); no forge-site code changes
+- S23: Remove internal workaround/amendment comments from all four module templates + main.go; no functional changes
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent

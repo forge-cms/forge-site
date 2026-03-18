@@ -442,3 +442,23 @@ code changes required — the bug was entirely in forge core and forge-mcp.
 
 **Consequences:** `go.mod`/`go.sum` updated. `forge-mcp-proxy.exe` rebuilt.
 Tags now work correctly via MCP tool calls.
+
+---
+
+### Amendment S23 — Remove internal workaround comments before repo goes public
+
+**Decision:** Strip all internal-scaffolding comments from templates and
+`main.go` before the repository is made public. Specifically:
+
+- Remove `WORKAROUND S9` comment line from `templates/base.html`
+- Remove `Amendment S6` nav/footer sync-reminder comments from all four
+  module templates (`devlog/list.html`, `devlog/show.html`, `docs/list.html`,
+  `docs/show.html`)
+- Update the MCP Bearer token comment in `main.go` — remove "Temporary:" prefix,
+  add deployment note
+- Simplify the home-template `forge:head` comment in `main.go`
+
+No functional changes. The workarounds themselves remain in place.
+
+**Consequences:** Cleaner public repo — no internal scaffolding notes visible
+to outside contributors. `cmd/mcp/main.go` trailing whitespace fixed by `gofmt`.
