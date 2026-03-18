@@ -4,7 +4,7 @@ go 1.26
 
 require (
 	github.com/forge-cms/forge v1.1.3
-	github.com/forge-cms/forge/forge-mcp v1.0.1
+	github.com/forge-cms/forge/forge-mcp v1.0.2
 	modernc.org/sqlite v1.46.1
 )
 

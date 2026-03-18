@@ -43,6 +43,7 @@ PROJECT_BRIEF.md to restore full context.
 - S26: forge v1.1.3 — A53 content negotiation fix; crawlers now receive HTML not JSON
 - S27: Extend README with API/MCP/AI/boilerplate sections; clarify SESSION_CONTEXT.md note in copilot-instructions
 - S28: Fix horizontal scroll on ~360px mobile — overflow-x hidden on html/body, feat-grid minmax fix, code-block max-width 100%
+- S29: forge-mcp v1.0.2 — admin read tools exposed automatically via existing forgemcp.New(app) wiring
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -52,7 +53,7 @@ PROJECT_BRIEF.md to restore full context.
 
 ## Forge version in use
 github.com/forge-cms/forge v1.1.3
-forge-mcp v1.0.1
+forge-mcp v1.0.2
 
 ## Next up (backlog)
 - Markdown rendering — `{{ .Item.Body | markdown }}` in show templates
