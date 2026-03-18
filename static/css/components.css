@@ -347,7 +347,7 @@
 /* ── .feat-grid ── */
 .feat-grid {
   display:    grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap:        0;
   border:     1px solid var(--border);
   border-radius: 4px;
@@ -426,6 +426,9 @@
 @media (max-width: 768px) {
   .why-grid {
     grid-template-columns: 1fr;
+  }
+  .code-block {
+    max-width: 100%;
   }
   .hero {
     padding-top:    calc(var(--nav-height) + 1.25rem);

@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-18 (S27)
+Last updated: 2026-03-18 (S28)
 
 ---
 
@@ -29,6 +29,7 @@ Last updated: 2026-03-18 (S27)
 - [x] Add required image field to BlogPosting JSON-LD (S25) — 2026-03-18
 - [x] Upgrade forge v1.1.3, A53 content negotiation fix (S26) — 2026-03-18
 - [x] Extend README + clarify copilot-instructions for public repo (S27) — 2026-03-18
+- [x] Fix horizontal scroll on narrow mobile viewports (S28) — 2026-03-18
 
 ## Backlog
 

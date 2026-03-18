@@ -525,3 +525,20 @@ purpose is self-evident to external contributors.
 
 **Consequences:** `README.md` and `.github/copilot-instructions.md` updated.
 No code changes.
+
+---
+
+### Amendment S28 — Fix horizontal scroll on narrow mobile viewports
+
+**Decision:** Three surgical CSS fixes targeting Galaxy S25 and similar ~360px screens:
+
+- `base.css` — add `overflow-x: hidden` to `html` and `body` as a global guard
+- `components.css` — change `.feat-grid` column minimum from `minmax(260px, 1fr)`
+  to `minmax(min(260px, 100%), 1fr)` so 260px columns never overflow the viewport
+- `components.css` — add `.code-block { max-width: 100% }` inside the existing
+  `@media (max-width: 768px)` block
+
+No layout or visual changes on desktop.
+
+**Consequences:** `base.css` and `components.css` updated. Home page, devlog list,
+and devlog show pages no longer produce horizontal scroll at 360px.
