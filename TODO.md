@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-18 (S23)
+Last updated: 2026-03-18 (S24)
 
 ---
 
@@ -25,6 +25,7 @@ Last updated: 2026-03-18 (S23)
 - [x] cmd/mcp proxy for Claude Desktop (S21) — 2026-03-17
 - [x] Upgrade forge v1.1.2 + forge-mcp v1.0.1, array-aware tags (S22) — 2026-03-18
 - [x] Remove internal workaround comments from templates + main.go (S23) — 2026-03-18
+- [x] Add BlogPosting + TechArticle JSON-LD to show templates (S24) — 2026-03-18
 
 ## Backlog
 

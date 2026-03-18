@@ -462,3 +462,23 @@ No functional changes. The workarounds themselves remain in place.
 
 **Consequences:** Cleaner public repo — no internal scaffolding notes visible
 to outside contributors. `cmd/mcp/main.go` trailing whitespace fixed by `gofmt`.
+
+---
+
+### Amendment S24 — BlogPosting and TechArticle JSON-LD for rich search results
+
+**Decision:** Add page-level JSON-LD structured data to the two show templates:
+
+- `templates/devlog/show.html`: `BlogPosting` schema with `headline`,
+  `datePublished` (via `forge_rfc3339 .Content.PublishedAt`), `author`,
+  `publisher` (with logo), and `url` (`.Head.Canonical`, already absolute
+  per Amendment S19).
+- `templates/docs/show.html`: `TechArticle` schema with `headline`, `author`,
+  `publisher`, and `url`. No `datePublished` — `DocPage` has no `PublishedAt`.
+
+The Organization JSON-LD in `base.html` is intentionally kept separate
+(Knowledge Panel vs. article rich snippets).
+
+**Consequences:** Devlog posts become eligible for article rich snippets in
+Google Search (date + author). Docs pages become eligible for TechArticle
+snippets. `forge_rfc3339` is a built-in Forge template helper.

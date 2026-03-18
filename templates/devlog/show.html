@@ -4,6 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{template "forge:head" .Head}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{.Content.Title}}",
+    "datePublished": "{{forge_rfc3339 .Content.PublishedAt}}",
+    "author": {"@type": "Person", "name": "forge-cms"},
+    "publisher": {
+      "@type": "Organization",
+      "name": "Forge",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://forge-cms.dev/static/Forge-logo-OG1200.png"
+      }
+    },
+    "url": "{{.Head.Canonical}}"
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link rel="stylesheet" href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,600|inter:300,400&display=swap">
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">

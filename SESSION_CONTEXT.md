@@ -38,6 +38,7 @@ PROJECT_BRIEF.md to restore full context.
 - S21: cmd/mcp/main.go — stdlib stdio-to-SSE proxy for Claude Desktop; builds to forge-mcp-proxy.exe; token via MCP_TOKEN env var
 - S22: forge v1.1.2 + forge-mcp v1.0.1 — array-aware MCP tags fixed (A52); no forge-site code changes
 - S23: Remove internal workaround/amendment comments from all four module templates + main.go; no functional changes
+- S24: BlogPosting JSON-LD in devlog/show.html + TechArticle JSON-LD in docs/show.html; forge_rfc3339 for datePublished
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
