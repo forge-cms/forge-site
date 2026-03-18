@@ -40,6 +40,7 @@ PROJECT_BRIEF.md to restore full context.
 - S23: Remove internal workaround/amendment comments from all four module templates + main.go; no functional changes
 - S24: BlogPosting JSON-LD in devlog/show.html + TechArticle JSON-LD in docs/show.html; forge_rfc3339 for datePublished
 - S25: Add required image field to BlogPosting JSON-LD (Google rich results eligibility)
+- S26: forge v1.1.3 — A53 content negotiation fix; crawlers now receive HTML not JSON
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -48,7 +49,7 @@ PROJECT_BRIEF.md to restore full context.
 - AppSchema + OGDefaults backlog entries ✅ sent
 
 ## Forge version in use
-github.com/forge-cms/forge v1.1.2
+github.com/forge-cms/forge v1.1.3
 forge-mcp v1.0.1
 
 ## Next up (backlog)

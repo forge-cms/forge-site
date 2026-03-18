@@ -498,3 +498,17 @@ established in Amendments S8 and S19.
 
 **Consequences:** Devlog posts are now fully eligible for Google article
 rich snippets.
+
+---
+
+### Amendment S26 — Upgrade forge to v1.1.3 (A53 content negotiation fix)
+
+**Decision:** Upgrade `github.com/forge-cms/forge` v1.1.2 → v1.1.3.
+This release fixes Amendment A53: `negotiate()` previously returned
+`application/json` for empty or `*/*` Accept headers even when templates
+were configured, causing Google Search Console and other crawlers to
+receive JSON instead of HTML. No forge-site code changes required.
+
+**Consequences:** `go.mod`/`go.sum` updated. Crawlers now receive HTML,
+making rich search results (BlogPosting, TechArticle JSON-LD from S24/S25)
+visible to Google.
