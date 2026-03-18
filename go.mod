@@ -3,8 +3,8 @@ module forge-site
 go 1.26
 
 require (
-	github.com/forge-cms/forge v1.1.1
-	github.com/forge-cms/forge/forge-mcp v1.0.0
+	github.com/forge-cms/forge v1.1.2
+	github.com/forge-cms/forge/forge-mcp v1.0.1
 	modernc.org/sqlite v1.46.1
 )
 

@@ -427,3 +427,18 @@ No external dependencies. `forge-mcp-proxy.exe` is gitignored (build artefact).
 
 **Consequences:** `cmd/mcp/main.go` added. Claude Desktop `mcpServers` config
 points to the local exe with `MCP_TOKEN` env var.
+
+---
+
+### Amendment S22 — Upgrade forge v1.1.2 + forge-mcp v1.0.1 — array-aware MCP tags
+
+**Decision:** Upgrade `github.com/forge-cms/forge` v1.1.1 → v1.1.2 and
+`github.com/forge-cms/forge/forge-mcp` v1.0.0 → v1.0.1. These releases fix
+Amendment A52: `[]string` fields (e.g. `Tags`) are now typed as `"array"` in
+MCP tool schemas; `inputSchema` emits `{"type":"array","items":{"type":"string"}}`;
+`coerceSliceFields` auto-splits comma-separated tag strings, so both
+`"tags": "forge,go"` and `"tags": ["forge","go"]` are accepted. No forge-site
+code changes required — the bug was entirely in forge core and forge-mcp.
+
+**Consequences:** `go.mod`/`go.sum` updated. `forge-mcp-proxy.exe` rebuilt.
+Tags now work correctly via MCP tool calls.

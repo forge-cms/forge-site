@@ -36,6 +36,7 @@ PROJECT_BRIEF.md to restore full context.
 - S19: siteBaseURL package var — Head() Canonical now absolute; Head.Image set to Forge-logo-OG1200.png (1200×630); og:url and og:image now present
 - S20: forge-mcp v1.0.0 wired — MCP(MCPRead, MCPWrite) on Post+DocPage; GET /mcp + POST /mcp/message mounted; admin Bearer token logged at startup
 - S21: cmd/mcp/main.go — stdlib stdio-to-SSE proxy for Claude Desktop; builds to forge-mcp-proxy.exe; token via MCP_TOKEN env var
+- S22: forge v1.1.2 + forge-mcp v1.0.1 — array-aware MCP tags fixed (A52); no forge-site code changes
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -44,7 +45,8 @@ PROJECT_BRIEF.md to restore full context.
 - AppSchema + OGDefaults backlog entries ✅ sent
 
 ## Forge version in use
-github.com/forge-cms/forge v1.1.1
+github.com/forge-cms/forge v1.1.2
+forge-mcp v1.0.1
 
 ## Next up (backlog)
 - Markdown rendering — `{{ .Item.Body | markdown }}` in show templates
