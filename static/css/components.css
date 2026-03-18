@@ -578,6 +578,20 @@
   .doc-page__sidebar {
     position: static;
   }
+
+  .post {
+    flex-wrap: wrap;
+    gap:       var(--space-1) var(--space-8);
+  }
+
+  .post__date {
+    width:     100%;
+    min-width: unset;
+  }
+
+  .post__title {
+    flex: 1;
+  }
 }
 
 /* ── .doc-nav (docs sidebar) ── */
