@@ -3,7 +3,7 @@ services:
     build:
       context: .
       args:
-        VERSION: "${VERSION:-dev}"
+        VERSION: "forge-mcp/v1.0.2"
     image: forge-site:${VERSION:-dev}
     restart: unless-stopped
     ports:

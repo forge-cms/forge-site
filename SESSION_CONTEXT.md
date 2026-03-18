@@ -44,6 +44,7 @@ PROJECT_BRIEF.md to restore full context.
 - S27: Extend README with API/MCP/AI/boilerplate sections; clarify SESSION_CONTEXT.md note in copilot-instructions
 - S28: Fix horizontal scroll on ~360px mobile — overflow-x hidden on html/body, feat-grid minmax fix, code-block max-width 100%
 - S29: forge-mcp v1.0.2 — admin read tools exposed automatically via existing forgemcp.New(app) wiring
+- S30: Build-time version in /_health via ldflags — var version = "dev", -X main.version, docker-compose VERSION pinned to forge-mcp/v1.0.2
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent

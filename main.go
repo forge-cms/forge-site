@@ -26,8 +26,8 @@ var templates embed.FS
 //go:embed static
 var static embed.FS
 
-// Version is set at build time via -ldflags "-X main.Version=x.y.z".
-var Version string
+// version is set at build time via -ldflags "-X main.version=x.y.z".
+var version = "dev"
 
 // siteBaseURL is the canonical origin (e.g. "https://forge-cms.dev") used to
 // build absolute og:url and og:image values. Set once at startup from the
@@ -84,7 +84,7 @@ func main() {
 	app := forge.New(forge.Config{
 		BaseURL: baseURL,
 		Secret:  []byte(secret),
-		Version: Version,
+		Version: version,
 		DB:      db,
 		HTTPS:   strings.HasPrefix(baseURL, "https"),
 	})
