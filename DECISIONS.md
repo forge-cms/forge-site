@@ -482,3 +482,19 @@ The Organization JSON-LD in `base.html` is intentionally kept separate
 **Consequences:** Devlog posts become eligible for article rich snippets in
 Google Search (date + author). Docs pages become eligible for TechArticle
 snippets. `forge_rfc3339` is a built-in Forge template helper.
+
+---
+
+### Amendment S25 — Add required image field to BlogPosting JSON-LD
+
+**Decision:** Add `"image"` to the `BlogPosting` JSON-LD block in
+`templates/devlog/show.html`. Google requires an image field for BlogPosting
+rich results eligibility — without it the schema validates but is silently
+ignored by the Rich Results Test.
+
+The value is hardcoded to the site-level OG fallback image
+(`/static/Forge-logo-OG1200.png`), identical to the `og:image` value
+established in Amendments S8 and S19.
+
+**Consequences:** Devlog posts are now fully eligible for Google article
+rich snippets.
