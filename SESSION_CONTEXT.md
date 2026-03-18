@@ -47,6 +47,7 @@ PROJECT_BRIEF.md to restore full context.
 - S30: Build-time version in /_health via ldflags — var version = "dev", -X main.version, docker-compose VERSION pinned to forge-mcp/v1.0.2
 - S31: forge-mcp v1.0.3 — no forge-site code changes
 - S32: forge-mcp v1.0.4 — no forge-site code changes
+- S33: forge-mcp v1.0.5 — no forge-site code changes
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -56,7 +57,7 @@ PROJECT_BRIEF.md to restore full context.
 
 ## Forge version in use
 github.com/forge-cms/forge v1.1.3
-forge-mcp v1.0.4
+forge-mcp v1.0.5
 
 ## Next up (backlog)
 - Markdown rendering — `{{ .Item.Body | markdown }}` in show templates
