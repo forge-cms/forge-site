@@ -157,7 +157,7 @@ func main() {
 	hostname := strings.TrimPrefix(strings.TrimPrefix(baseURL, "https://"), "http://")
 	app.Handle("GET /", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
-			http.NotFound(w, r)
+			forge.WriteError(w, r, forge.ErrNotFound)
 			return
 		}
 		all, err := postRepo.FindAll(r.Context(), forge.ListOptions{})

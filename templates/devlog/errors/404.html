@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 — Not found · Forge</title>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,600" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0b0d;
+      color: #dde1e7;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .error-code {
+      font-size: clamp(5rem, 20vw, 9rem);
+      font-weight: 600;
+      line-height: 1;
+      color: #e8702f;
+      letter-spacing: -0.04em;
+    }
+
+    .error-message {
+      font-size: 1.15rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    .error-divider {
+      width: 48px;
+      height: 2px;
+      background: #e8702f33;
+    }
+
+    .error-detail {
+      font-size: 0.9rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    .home-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      border: 1px solid #e8702f33;
+      border-radius: 4px;
+      color: #e8702f;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .home-link:hover {
+      border-color: #e8702f;
+      background: #e8702f1a;
+    }
+
+    .req-id {
+      font-size: 0.75rem;
+      color: #2a3038;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-code">{{.Status}}</div>
+  <div class="error-divider"></div>
+  <p class="error-message">{{.Message}}</p>
+  <p class="error-detail">The page you were looking for doesn&rsquo;t exist.</p>
+  <a href="/" class="home-link">← back to home</a>
+  {{if .RequestID}}<p class="req-id">request id: {{.RequestID}}</p>{{end}}
+</body>
+</html>

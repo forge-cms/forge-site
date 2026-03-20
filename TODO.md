@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-18 (S28)
+Last updated: 2026-03-20 (S36)
 
 ---
 
@@ -20,6 +20,8 @@ Last updated: 2026-03-18 (S28)
 
 ## Done
 
+- [x] Route home handler 404 through forge.WriteError (S36) — 2026-03-20
+- [x] Add styled 404 error template for module routes (S35) — 2026-03-20
 - [x] Fix absolute og:url and add og:image (S19) — 2026-03-17
 - [x] Wire forge-mcp — MCP read+write endpoints (S20) — 2026-03-17
 - [x] cmd/mcp proxy for Claude Desktop (S21) — 2026-03-17

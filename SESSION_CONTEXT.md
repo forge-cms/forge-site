@@ -49,6 +49,8 @@ PROJECT_BRIEF.md to restore full context.
 - S32: forge-mcp v1.0.4 — no forge-site code changes
 - S33: forge-mcp v1.0.5 — no forge-site code changes
 - S34: forge v1.1.4 — replace S19 siteBaseURL workaround with forge.AbsURL(); siteBaseURL var removed
+- S35: Add styled 404 error template — templates/devlog/errors/404.html; self-contained, inline styles matching site palette
+- S36: Route home handler 404 through forge.WriteError — replaces http.NotFound in main.go GET / handler
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent

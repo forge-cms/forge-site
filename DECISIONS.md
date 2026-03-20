@@ -546,7 +546,7 @@ with the proper Forge helper. Output is identical.
 
 ---
 
-
+### Amendment S28 — Fix horizontal scroll on narrow mobile viewports
 
 **Decision:** Three surgical CSS fixes targeting Galaxy S25 and similar ~360px screens:
 
@@ -560,3 +560,25 @@ No layout or visual changes on desktop.
 
 **Consequences:** `base.css` and `components.css` updated. Home page, devlog list,
 and devlog show pages no longer produce horizontal scroll at 360px.
+
+---
+
+### Amendment S35 — Add styled 404 error template for module routes
+
+**Decision:** Create `templates/devlog/errors/404.html` — a self-contained,
+standalone HTML page (no `base.html`, no `forge:head`) served by Forge's error
+handler when a `/devlog/*` route returns 404.
+
+The template receives `.Status` (int), `.Message` (string), and `.RequestID`
+(string). It uses inline styles matching the site palette (`#0a0b0d` background,
+`#e8702f` accent, JetBrains Mono via Bunny Fonts) and includes a link back to `/`.
+
+**Consequences:** `templates/devlog/errors/404.html` added. No Go code changes.
+
+---
+
+### Amendment S36 — Route home handler 404 through forge.WriteError
+
+**Decision:** In `main.go`, in the home `GET /` handler, replace `http.NotFound(w, r)` with `forge.WriteError(w, r, forge.ErrNotFound)`. This routes unknown paths through Forge's error handler, which resolves and renders `templates/devlog/errors/404.html` automatically.
+
+**Consequences:** `main.go` updated. Unknown paths beneath `/` now receive the styled 404 page instead of Go's default plain-text 404.
