@@ -12,12 +12,11 @@ RUN go mod download
 # Copy source and build.
 # CGO_ENABLED=0: modernc.org/sqlite is pure-Go — no C toolchain needed.
 # -trimpath: strip local file paths from the binary.
-# -ldflags: embed VERSION and strip debug symbols for a smaller image.
+# -ldflags: strip debug symbols for a smaller image.
 COPY . .
-ARG VERSION=dev
 RUN CGO_ENABLED=0 go build \
       -trimpath \
-      -ldflags "-s -w -X main.version=${VERSION}" \
+      -ldflags "-s -w" \
       -o /forge-site \
       .
 

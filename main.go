@@ -26,9 +26,6 @@ var templates embed.FS
 //go:embed static
 var static embed.FS
 
-// version is set at build time via -ldflags "-X main.version=x.y.z".
-var version = "dev"
-
 // siteBaseURL is the canonical origin (e.g. "https://forge-cms.dev").
 // Passed to forge.AbsURL() in Head() methods to build absolute og:url
 // and og:image values.
@@ -84,7 +81,6 @@ func main() {
 	app := forge.New(forge.Config{
 		BaseURL: baseURL,
 		Secret:  []byte(secret),
-		Version: version,
 		DB:      db,
 		HTTPS:   strings.HasPrefix(baseURL, "https"),
 	})
@@ -128,7 +124,7 @@ func main() {
 			return forge.Head{
 				Title:       "Devlog — Forge",
 				Description: "Engineering notes and release announcements from the Forge team.",
-				Canonical:   baseURL + forge.URL("/devlog"),
+				Canonical:   forge.AbsURL(baseURL, forge.URL("/devlog")),
 			}
 		}),
 	))
@@ -145,7 +141,7 @@ func main() {
 			return forge.Head{
 				Title:       "Docs — Forge",
 				Description: "Documentation for the Forge Go web framework.",
-				Canonical:   baseURL + forge.URL("/docs"),
+				Canonical:   forge.AbsURL(baseURL, forge.URL("/docs")),
 			}
 		}),
 	))

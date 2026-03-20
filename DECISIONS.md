@@ -590,3 +590,15 @@ The template receives `.Status` (int), `.Message` (string), and `.RequestID`
 **Decision:** Upgrade `github.com/forge-cms/forge` v1.1.4 → v1.1.7.
 
 **Consequences:** `go.mod`/`go.sum` updated. No forge-site code changes required.
+
+---
+
+### Amendment S38 — Remove ldflags versioning, fix HeadFunc Canonicals, clean docker-compose
+
+**Decision:** Three related cleanup items:
+
+- Remove `var version = "dev"` and `Version: version` from `main.go`/`forge.Config{}` — Forge no longer exposes a `Version` config field.
+- Replace string-concat Canonicals in both `HeadFunc` calls: `baseURL + forge.URL(...)` → `forge.AbsURL(baseURL, forge.URL(...))`, consistent with S34.
+- Remove `-X main.version=${VERSION}` from Dockerfile `ldflags` and the `ARG VERSION` + `args:` block from `docker-compose.yml`.
+
+**Consequences:** `main.go`, `Dockerfile`, `docker-compose.yml` updated. No functional change to served content.

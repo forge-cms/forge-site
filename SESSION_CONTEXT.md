@@ -52,6 +52,7 @@ PROJECT_BRIEF.md to restore full context.
 - S35: Add styled 404 error template — templates/devlog/errors/404.html; self-contained, inline styles matching site palette
 - S36: Route home handler 404 through forge.WriteError — replaces http.NotFound in main.go GET / handler
 - S37: forge v1.1.7 — upgrade from v1.1.4; no forge-site code changes
+- S38: Remove ldflags versioning + Version config field; fix HeadFunc Canonicals to forge.AbsURL; remove VERSION build arg from Dockerfile/docker-compose
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent

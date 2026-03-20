@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-20 (S37)
+Last updated: 2026-03-20 (S38)
 
 ---
 
@@ -20,6 +20,7 @@ Last updated: 2026-03-20 (S37)
 
 ## Done
 
+- [x] Remove ldflags versioning, fix HeadFunc Canonicals, clean docker-compose (S38) — 2026-03-20
 - [x] Upgrade forge v1.1.7 (S37) — 2026-03-20
 - [x] Route home handler 404 through forge.WriteError (S36) — 2026-03-20
 - [x] Add styled 404 error template for module routes (S35) — 2026-03-20

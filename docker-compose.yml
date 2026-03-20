@@ -2,9 +2,7 @@ services:
   app:
     build:
       context: .
-      args:
-        VERSION: "forge-mcp/v1.0.5"
-    image: forge-site:${VERSION:-dev}
+    image: forge-site
     restart: unless-stopped
     ports:
       - "127.0.0.1:8080:8080"
