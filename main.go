@@ -29,9 +29,9 @@ var static embed.FS
 // version is set at build time via -ldflags "-X main.version=x.y.z".
 var version = "dev"
 
-// siteBaseURL is the canonical origin (e.g. "https://forge-cms.dev") used to
-// build absolute og:url and og:image values. Set once at startup from the
-// BASE_URL env var before any module Head() method is called.
+// siteBaseURL is the canonical origin (e.g. "https://forge-cms.dev").
+// Passed to forge.AbsURL() in Head() methods to build absolute og:url
+// and og:image values.
 var siteBaseURL string
 
 // homeData is the template data passed to templates/home/home.html.

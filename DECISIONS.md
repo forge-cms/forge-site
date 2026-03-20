@@ -528,7 +528,25 @@ No code changes.
 
 ---
 
-### Amendment S28 — Fix horizontal scroll on narrow mobile viewports
+### Amendment S34 — Upgrade forge to v1.1.4, replace S19 string concat with forge.AbsURL()
+
+**Decision:** Upgrade `github.com/forge-cms/forge` v1.1.3 → v1.1.4.
+This release adds `forge.AbsURL(base, path string)`, a proper URL builder
+that trims trailing slashes and handles path joining correctly.
+
+Replace S19 manual string concatenation in `post.go` and `docpage.go`:
+- `siteBaseURL + forge.URL("/devlog/", p.Slug)` → `forge.AbsURL(siteBaseURL, forge.URL("/devlog/", p.Slug))`
+- `siteBaseURL + "/static/Forge-logo-OG1200.png"` → `forge.AbsURL(siteBaseURL, "/static/Forge-logo-OG1200.png")`
+- Same pattern in `docpage.go` for `/docs/`
+
+`siteBaseURL` package var is retained as the base argument to `forge.AbsURL`.
+
+**Consequences:** `go.mod`/`go.sum` updated. S19 string concatenation replaced
+with the proper Forge helper. Output is identical.
+
+---
+
+
 
 **Decision:** Three surgical CSS fixes targeting Galaxy S25 and similar ~360px screens:
 

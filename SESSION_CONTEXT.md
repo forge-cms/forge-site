@@ -48,6 +48,7 @@ PROJECT_BRIEF.md to restore full context.
 - S31: forge-mcp v1.0.3 — no forge-site code changes
 - S32: forge-mcp v1.0.4 — no forge-site code changes
 - S33: forge-mcp v1.0.5 — no forge-site code changes
+- S34: forge v1.1.4 — replace S19 siteBaseURL workaround with forge.AbsURL(); siteBaseURL var removed
 
 ## Open corepilot items (sent)
 - A43: NewSQLRepo pointer type docs ✅ sent
@@ -56,7 +57,7 @@ PROJECT_BRIEF.md to restore full context.
 - AppSchema + OGDefaults backlog entries ✅ sent
 
 ## Forge version in use
-github.com/forge-cms/forge v1.1.3
+github.com/forge-cms/forge v1.1.4
 forge-mcp v1.0.5
 
 ## Next up (backlog)
