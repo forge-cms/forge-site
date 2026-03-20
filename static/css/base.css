@@ -93,11 +93,12 @@ ul, ol {
    Always wrap {{forge_markdown .Content.Body}} in <div class="prose">.
    ========================================================================== */
 .prose {
-  font-family: var(--sans);
-  font-size:   0.9375rem;
-  font-weight: 300;
-  color:       var(--text);
-  line-height: 1.75;
+  font-family:   var(--sans);
+  font-size:     0.9375rem;
+  font-weight:   300;
+  color:         var(--text);
+  line-height:   1.75;
+  margin-bottom: var(--space-8);
 }
 
 .prose p {

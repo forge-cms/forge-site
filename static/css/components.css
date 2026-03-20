@@ -515,7 +515,8 @@
   font-size:   0.7rem;
   color:       var(--text-dim);
   white-space: nowrap;
-  min-width:   80px;
+  width:       130px;
+  flex-shrink: 0;
 }
 
 .post__title {

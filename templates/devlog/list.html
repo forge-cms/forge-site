@@ -34,7 +34,7 @@
     <div class="post-list">
       {{range .Content}}
       <a href="/devlog/{{.Slug}}" class="post">
-        {{if not .PublishedAt.IsZero}}<span class="post__date">{{forge_date .PublishedAt}}</span>{{end}}
+        <span class="post__date">{{if not .PublishedAt.IsZero}}{{forge_date .PublishedAt}}{{end}}</span>
         <span class="post__title">{{.Title}}</span>
         <span class="post__arrow">→</span>
       </a>
