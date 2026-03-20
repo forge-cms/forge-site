@@ -582,3 +582,11 @@ The template receives `.Status` (int), `.Message` (string), and `.RequestID`
 **Decision:** In `main.go`, in the home `GET /` handler, replace `http.NotFound(w, r)` with `forge.WriteError(w, r, forge.ErrNotFound)`. This routes unknown paths through Forge's error handler, which resolves and renders `templates/devlog/errors/404.html` automatically.
 
 **Consequences:** `main.go` updated. Unknown paths beneath `/` now receive the styled 404 page instead of Go's default plain-text 404.
+
+---
+
+### Amendment S37 — Upgrade forge to v1.1.7
+
+**Decision:** Upgrade `github.com/forge-cms/forge` v1.1.4 → v1.1.7.
+
+**Consequences:** `go.mod`/`go.sum` updated. No forge-site code changes required.

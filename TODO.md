@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-20 (S36)
+Last updated: 2026-03-20 (S37)
 
 ---
 
@@ -20,6 +20,7 @@ Last updated: 2026-03-20 (S36)
 
 ## Done
 
+- [x] Upgrade forge v1.1.7 (S37) — 2026-03-20
 - [x] Route home handler 404 through forge.WriteError (S36) — 2026-03-20
 - [x] Add styled 404 error template for module routes (S35) — 2026-03-20
 - [x] Fix absolute og:url and add og:image (S19) — 2026-03-17
