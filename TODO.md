@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-21
+Last updated: 2026-03-21 (S39)
 
 ---
 
@@ -20,6 +20,7 @@ Last updated: 2026-03-21
 
 ## Done
 
+- [x] Re-enable Caddy health_uri — forge v1.1.7 A59 exempts /_health from HTTPS redirect (S39) — 2026-03-21
 - [x] Remove ldflags versioning, fix HeadFunc Canonicals, clean docker-compose (S38) — 2026-03-20
 - [x] Upgrade forge v1.1.7 (S37) — 2026-03-20
 - [x] Route home handler 404 through forge.WriteError (S36) — 2026-03-20
@@ -45,11 +46,6 @@ Last updated: 2026-03-21
 
 ## Backlog
 
-- [ ] Markdown rendering — Body field renders raw markdown; needs markdown→HTML
-  in templates via `forge.TemplateFuncMap` (Amendment A46 in core, then
-  wire `{{ .Item.Body | markdown }}` in devlog/docs show templates)
-- [ ] Health check — Caddy `health_uri` removed as workaround; Forge HTTPS
-  redirect breaks internal `/_health` calls (Amendment S10 context)
 - [ ] ADMIN_TOKEN — set a persistent token in `.env` so it survives restarts
   without re-fetching from logs
 

@@ -653,3 +653,19 @@ The template receives `.Status` (int), `.Message` (string), and `.RequestID`
 - Remove `-X main.version=${VERSION}` from Dockerfile `ldflags` and the `ARG VERSION` + `args:` block from `docker-compose.yml`.
 
 **Consequences:** `main.go`, `Dockerfile`, `docker-compose.yml` updated. No functional change to served content.
+
+---
+
+### Amendment S39 — Re-enable Caddy health_uri (forge v1.1.7 A59 fix)
+
+**Context:** Since S10, `forge.Config{HTTPS: true}` caused `GET /_health` to return
+301, breaking Caddy's `health_uri` probe. The workaround was to remove `health_uri`
+from the Caddyfile (noted in issue #3 context).
+
+**Decision:** forge v1.1.7 ships A59, which exempts `/_health` from the HTTPS
+redirect. `health_uri /_health` is confirmed safe and remains present in `Caddyfile`.
+No code changes — this documents that the workaround is resolved and the health probe
+is active.
+
+**Consequences:** No file changes. `Caddyfile` already has `health_uri /_health`.
+Caddy health probes are operational.
