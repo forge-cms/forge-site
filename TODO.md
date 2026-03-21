@@ -6,7 +6,7 @@ Items in **Backlog** are high-level categories — not yet broken into tasks.
 When an item moves to **Up next**, it is broken into atomic tasks before work begins.
 Maximum 2 items **In progress** at once.
 
-Last updated: 2026-03-20 (S38)
+Last updated: 2026-03-21
 
 ---
 
@@ -24,6 +24,14 @@ Last updated: 2026-03-20 (S38)
 - [x] Upgrade forge v1.1.7 (S37) — 2026-03-20
 - [x] Route home handler 404 through forge.WriteError (S36) — 2026-03-20
 - [x] Add styled 404 error template for module routes (S35) — 2026-03-20
+- [x] Upgrade forge v1.1.4, replace siteBaseURL string concat with forge.AbsURL() (S34) — 2026-03-20
+- [x] CSS fixes: .prose margin-bottom, .post__date fixed-width column, date span always rendered — 2026-03-20
+- [x] Upgrade forge-mcp v1.0.5, delete_post tool (S33) — 2026-03-19
+- [x] Upgrade forge-mcp v1.0.4, MCP content wrapper (S32) — 2026-03-19
+- [x] Upgrade forge-mcp v1.0.3, list response format fix (S31) — 2026-03-19
+- [x] Build-time version via ldflags (S30) — 2026-03-19
+- [x] Upgrade forge-mcp v1.0.2, admin read tools automatically exposed (S29) — 2026-03-19
+- [x] Fix horizontal scroll on narrow mobile viewports (S28) — 2026-03-18
 - [x] Fix absolute og:url and add og:image (S19) — 2026-03-17
 - [x] Wire forge-mcp — MCP read+write endpoints (S20) — 2026-03-17
 - [x] cmd/mcp proxy for Claude Desktop (S21) — 2026-03-17

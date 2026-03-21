@@ -528,6 +528,74 @@ No code changes.
 
 ---
 
+### Amendment S28 — Fix horizontal scroll on narrow mobile viewports
+
+**Decision:** Three surgical CSS fixes targeting Galaxy S25 and similar ~360px screens:
+
+- `base.css` — add `overflow-x: hidden` to `html` and `body` as a global guard
+- `components.css` — change `.feat-grid` column minimum from `minmax(260px, 1fr)`
+  to `minmax(min(260px, 100%), 1fr)` so 260px columns never overflow the viewport
+- `components.css` — add `.code-block { max-width: 100% }` inside the existing
+  `@media (max-width: 768px)` block
+
+No layout or visual changes on desktop.
+
+**Consequences:** `base.css` and `components.css` updated. Home page, devlog list,
+and devlog show pages no longer produce horizontal scroll at 360px.
+
+---
+
+### Amendment S29 — Upgrade forge-mcp to v1.0.2 — admin read tools automatically exposed
+
+**Decision:** Upgrade `github.com/forge-cms/forge-mcp` v1.0.1 → v1.0.2. This release
+adds admin read tools (list posts, get post by slug, list docs, get doc by slug) and
+exposes them automatically via the existing `forgemcp.New(app)` mount — no
+forge-site code changes required.
+
+**Consequences:** `go.mod`/`go.sum` updated. MCP admin read tools now available.
+
+---
+
+### Amendment S30 — Build-time version in /_health via ldflags (superseded by S38)
+
+**Decision:** Introduce `var version = "dev"` in `main.go` and populate
+`forge.Config{Version: version}`. Add `-X main.version=${VERSION}` to the
+Dockerfile `ldflags` line. Pin `VERSION` in `docker-compose.yml` `args:` to the
+forge-mcp version in use (`forge-mcp/v1.0.2`). This exposes the build version
+at `/_health`.
+
+**Consequences:** `main.go`, `Dockerfile`, `docker-compose.yml` updated.
+**Superseded by S38**, which removes this versioning mechanism entirely.
+
+---
+
+### Amendment S31 — Upgrade forge-mcp to v1.0.3
+
+**Decision:** Upgrade `github.com/forge-cms/forge-mcp` v1.0.2 → v1.0.3. No
+forge-site code changes required.
+
+**Consequences:** `go.mod`/`go.sum` updated.
+
+---
+
+### Amendment S32 — Upgrade forge-mcp to v1.0.4
+
+**Decision:** Upgrade `github.com/forge-cms/forge-mcp` v1.0.3 → v1.0.4. No
+forge-site code changes required.
+
+**Consequences:** `go.mod`/`go.sum` updated.
+
+---
+
+### Amendment S33 — Upgrade forge-mcp to v1.0.5
+
+**Decision:** Upgrade `github.com/forge-cms/forge-mcp` v1.0.4 → v1.0.5. No
+forge-site code changes required.
+
+**Consequences:** `go.mod`/`go.sum` updated.
+
+---
+
 ### Amendment S34 — Upgrade forge to v1.1.4, replace S19 string concat with forge.AbsURL()
 
 **Decision:** Upgrade `github.com/forge-cms/forge` v1.1.3 → v1.1.4.
@@ -543,23 +611,6 @@ Replace S19 manual string concatenation in `post.go` and `docpage.go`:
 
 **Consequences:** `go.mod`/`go.sum` updated. S19 string concatenation replaced
 with the proper Forge helper. Output is identical.
-
----
-
-### Amendment S28 — Fix horizontal scroll on narrow mobile viewports
-
-**Decision:** Three surgical CSS fixes targeting Galaxy S25 and similar ~360px screens:
-
-- `base.css` — add `overflow-x: hidden` to `html` and `body` as a global guard
-- `components.css` — change `.feat-grid` column minimum from `minmax(260px, 1fr)`
-  to `minmax(min(260px, 100%), 1fr)` so 260px columns never overflow the viewport
-- `components.css` — add `.code-block { max-width: 100% }` inside the existing
-  `@media (max-width: 768px)` block
-
-No layout or visual changes on desktop.
-
-**Consequences:** `base.css` and `components.css` updated. Home page, devlog list,
-and devlog show pages no longer produce horizontal scroll at 360px.
 
 ---
 
