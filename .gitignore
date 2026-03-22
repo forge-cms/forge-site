@@ -3,3 +3,4 @@ forge-site.exe
 forge-site
 /data/
 *.exe
+/.vscode/
